@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head> 
+    <title>Pokémon Move Finder</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Search</h1>
+    <form action="#" th:action="@{/moves}" th:object="${movesInput}" method="post">
+    	<p>Move 1: <input type="text" th:field="*{move1}"/></p>
+        <p>Move 2: <input type="text" th:field="*{move2}" /></p>
+        <p>Move 3: <input type="text" th:field="*{move3}" /></p>
+        <p>Move 4: <input type="text" th:field="*{move4}" /></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</body>
+</html>
