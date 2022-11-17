@@ -1,5 +1,10 @@
 package com.mycompany.pokemonmovefinder;
 
+import com.mycompany.pokeapilibrary.Request;
+import com.mycompany.pokeapilibrary.SimpleInfo;
+import com.mycompany.pokeapilibrary.StringFormatter;
+import com.mycompany.pokeapilibrary.move.Moves;
+import java.util.ArrayList;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -16,7 +21,8 @@ public class PokemonMoveFinder {
             moveNames.setMove4("tail-whip");
         
             Search search = new Search(moveNames);
-            System.out.println(search.getUniquePkmnNames());
+            //System.out.println(search.getUniquePkmnNames());
+
 	}
         
 
