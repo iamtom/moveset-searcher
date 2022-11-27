@@ -3,7 +3,8 @@ package com.mycompany.pokemonmovefinder;
 import com.mycompany.pokeapilibrary.Request;
 import com.mycompany.pokeapilibrary.SimpleInfo;
 import com.mycompany.pokeapilibrary.StringFormatter;
-import com.mycompany.pokeapilibrary.move.Moves;
+import com.mycompany.pokeapilibrary.move.PagesOfMoves;
+import com.mycompany.pokemonmovefinder.tools.MoveFinderTools;
 import java.util.ArrayList;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,18 +19,8 @@ public class MainController {
     public String movesForm(Model model) {
         //replace following with getting the data from database
         //ArrayList<DropDownItem> moveSelectList = moveDataRepository.findAll(); something like this
-        //this code can go in MoveFinderTools?
-        Request request = new Request();
-        Moves moves = request.allMoves(0, 844);
-        ArrayList<SimpleInfo> results = moves.getResults();       
-        ArrayList<MoveData> moveSelectList = new ArrayList<>();        
-        for (int i = 0; i < results.size(); i++) {
-            String value = results.get(i).getName();
-            String text = StringFormatter.basicFormat(value);
-            
-            MoveData newItem = new MoveData(text, value);
-            moveSelectList.add(newItem);
-        }
+
+        ArrayList<MoveData> moveSelectList = MoveFinderTools.getArrayListOfMoveDataFromAPI();
         
         //System.out.println(moveList);
        
@@ -52,6 +43,9 @@ public class MainController {
         System.out.println(movesInput.getMove4());
 
         model.addAttribute("test", test);
+        
+        Search search = new Search(movesInput);
+        
         return "result";
     }
   
