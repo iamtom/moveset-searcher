@@ -88,28 +88,32 @@ public class Search {
     }
     
     public ArrayList<Result> getResults() {
-        ArrayList<Result> results = new ArrayList<>();
-        //find which pokemon can learn which of the moves
-        //ArrayList<Pokemon> pokemonList = createPokemonObjects();
-        ArrayList<Move> basicMoveInfo = this.getMovesFromAPI();
-        ArrayList<ArrayList<String>> pkmnThatLearnEachMove = new ArrayList<>();
+        ArrayList<Result> results = new ArrayList<>(); 
+        //find which pokemon can learn each of the moves
         
-        //for each move get the names of the pokemon that learn it and add
-        //to the names ArrayList. Add each ArrayList to pkmnThatLearnEachMove
-        for (int i = 0; i < basicMoveInfo.size(); i++) {
-            Move currentMove = basicMoveInfo.get(i);
-            ArrayList<String> names = this.listOfPkmnThatLearn(currentMove);
-            pkmnThatLearnEachMove.add(names);
+        //get all the moves first
+        ArrayList<Move> moveList = this.getMovesFromAPI();      
+        
+        //for each move get the names of the pokemon that learn it
+        //add those names to an ArrayList
+        //Add each ArrayList to namesOfPkmnThatLearnEachMove
+        //ArrayList of ArrayLists as 
+        ArrayList<ArrayList<String>> namesOfPkmnThatLearnEachMove = new ArrayList<>();
+        for (int i = 0; i < moveList.size(); i++) {
+            Move currentMove = moveList.get(i);
+            ArrayList<String> names = this.listOfNamesForPkmnThatLearn(currentMove);
+            namesOfPkmnThatLearnEachMove.add(names);
         }
         
         //now compare lists to find which pokemon can learn all the moves
-        ArrayList<String> pkmnThatLearnAllMoves = this.pkmnInAllLists(pkmnThatLearnEachMove);
+        ArrayList<String> pkmnThatLearnAllMoves = this.pkmnInAllLists(namesOfPkmnThatLearnEachMove);
+        System.out.println(pkmnThatLearnAllMoves);
         
         return results;
           
     }
 
-    private ArrayList<String> listOfPkmnThatLearn(Move basicMoveInfo) {
+    private ArrayList<String> listOfNamesForPkmnThatLearn(Move basicMoveInfo) {
         //one ArrayList of pkmn names per move
         ArrayList<String> pkmnThatLearnMove = new ArrayList<>();
         ArrayList<SimpleInfo> learnedByPokemon = basicMoveInfo.learnedByPokemon();
@@ -122,15 +126,32 @@ public class Search {
         return pkmnThatLearnMove;
     }
     
-    private ArrayList<String> pkmnInAllLists(ArrayList<ArrayList<String>> listOfLists) {
+    private ArrayList<String> pkmnInAllLists(ArrayList<ArrayList<String>> listOfLists) {    
+        ArrayList<String> firstList = listOfLists.get(0);
+        ArrayList<String> pkmnNames = new ArrayList<>();
+        
         //work through first list, if the pokemon name is in all the other lists
         //then we know it can learn all the moves
-        ArrayList<String> firstList = listOfLists.get(0);
         for(int i = 0; i < firstList.size(); i++) {
-            //TODO see if each name occurs in all the other lists
-            //if so add to list of pkmn
+            String currentPkmnName = firstList.get(i);
+            
+            //if reaches 4 add name to pkmnNames 
+            int noOfLists = 1;           
+            
+            //compare each item in firstList against currentList
+            for(int j = 1; j < listOfLists.size(); j++) {
+                if(listOfLists.get(j).contains(currentPkmnName)) {
+                    noOfLists++;
+                }                
+            }
+            
+            if(noOfLists == 4) {
+                pkmnNames.add(currentPkmnName);
+            }
+            
         }
         
+        return pkmnNames;
     }
     
 }

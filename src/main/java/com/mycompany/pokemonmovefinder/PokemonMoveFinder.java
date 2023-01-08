@@ -16,6 +16,7 @@ public class PokemonMoveFinder {
             moveNames.setMove4("tail-whip");
         
             Search search = new Search(moveNames);
+            search.getResults();
             //System.out.println(search.getUniquePkmnNames());
 
 	}
