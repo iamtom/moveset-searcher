@@ -56,8 +56,8 @@ public class MovesInput {
         }
         if(!this.move4.equals("")) {
             arrayList.add(move4);
-        }        
-        
+        }     
+                
         return arrayList;
     }
     

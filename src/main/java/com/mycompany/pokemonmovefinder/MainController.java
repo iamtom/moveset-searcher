@@ -31,20 +31,27 @@ public class MainController {
 
     @PostMapping("/moves")
     public String movesSubmit(@ModelAttribute MovesInput movesInput, Model model) {
-        MovesInput test = new MovesInput();
-        test.setMove1(movesInput.getMove1());
-        test.setMove2(movesInput.getMove2());
-        test.setMove3(movesInput.getMove3());
-        test.setMove4(movesInput.getMove4());
-        System.out.println("");
+//        MovesInput test = new MovesInput();
+//        test.setMove1(movesInput.getMove1());
+//        test.setMove2(movesInput.getMove2());
+//        test.setMove3(movesInput.getMove3());
+//        test.setMove4(movesInput.getMove4());
+//        System.out.println("");
+//        System.out.println(movesInput.getMove1());
+//        System.out.println(movesInput.getMove2());
+//        System.out.println(movesInput.getMove3());
+//        System.out.println(movesInput.getMove4());
+//        model.addAttribute("test", test);
+        
+        System.out.println("Moves selected:");
         System.out.println(movesInput.getMove1());
         System.out.println(movesInput.getMove2());
         System.out.println(movesInput.getMove3());
         System.out.println(movesInput.getMove4());
-
-        model.addAttribute("test", test);
         
         Search search = new Search(movesInput);
+        ArrayList<Result> searchResults = search.getResults();
+        model.addAttribute("searchResults", searchResults);       
         
         return "result";
     }

@@ -6,10 +6,16 @@
 </head>
 <body>
 	<h1>Result</h1>
+    <!--
     <p th:text="'Move 1: ' + ${test.move1}" />
     <p th:text="'Move 2: ' + ${test.move2}" />
     <p th:text="'Move 3: ' + ${test.move3}" />
     <p th:text="'Move 4: ' + ${test.move4}" />
+    -->
+    <tr th:each="searchResult : ${searchResults}">
+        <td th:text="${searchResult.pkmnName}" > 
+    </tr>
+    
     <a href="/moves">New Search</a>
 </body> 
 </html>

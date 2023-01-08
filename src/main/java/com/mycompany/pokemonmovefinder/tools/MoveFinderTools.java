@@ -41,8 +41,6 @@ public class MoveFinderTools {
         }
         Collections.sort(moveNames);
         
-        System.out.println(moveNames);
-        
         return moveNames;
     }
         

@@ -5,6 +5,7 @@ import com.mycompany.pokeapilibrary.SimpleInfo;
 import com.mycompany.pokeapilibrary.move.Move;
 import com.mycompany.pokeapilibrary.pokemon.Pokemon;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class Search {
@@ -29,7 +30,7 @@ public class Search {
             Move move = this.request.searchMove(searchFor);
             moves.add(move);
         }
-        
+                
         return moves;
     }
     
@@ -95,9 +96,9 @@ public class Search {
         ArrayList<Move> moveList = this.getMovesFromAPI();      
         
         //for each move get the names of the pokemon that learn it
-        //add those names to an ArrayList
+        //add those names to an ArrayList called 'names'
         //Add each ArrayList to namesOfPkmnThatLearnEachMove
-        //ArrayList of ArrayLists as 
+        //ArrayList of ArrayLists
         ArrayList<ArrayList<String>> namesOfPkmnThatLearnEachMove = new ArrayList<>();
         for (int i = 0; i < moveList.size(); i++) {
             Move currentMove = moveList.get(i);
@@ -107,7 +108,13 @@ public class Search {
         
         //now compare lists to find which pokemon can learn all the moves
         ArrayList<String> pkmnThatLearnAllMoves = this.pkmnInAllLists(namesOfPkmnThatLearnEachMove);
-        System.out.println(pkmnThatLearnAllMoves);
+        Collections.sort(pkmnThatLearnAllMoves);
+        System.out.println("Pokemon that learn these moves: " + pkmnThatLearnAllMoves);
+        
+        for(int i = 0; i < pkmnThatLearnAllMoves.size(); i++) {
+            String pkmnName = pkmnThatLearnAllMoves.get(i);
+            Result result = new Result(pkmnName);           
+        }
         
         return results;
           
@@ -126,7 +133,8 @@ public class Search {
         return pkmnThatLearnMove;
     }
     
-    private ArrayList<String> pkmnInAllLists(ArrayList<ArrayList<String>> listOfLists) {    
+    private ArrayList<String> pkmnInAllLists(ArrayList<ArrayList<String>> listOfLists) {
+        int noOfLists = listOfLists.size();
         ArrayList<String> firstList = listOfLists.get(0);
         ArrayList<String> pkmnNames = new ArrayList<>();
         
@@ -136,16 +144,16 @@ public class Search {
             String currentPkmnName = firstList.get(i);
             
             //if reaches 4 add name to pkmnNames 
-            int noOfLists = 1;           
+            int inLists = 1;           
             
             //compare each item in firstList against currentList
             for(int j = 1; j < listOfLists.size(); j++) {
                 if(listOfLists.get(j).contains(currentPkmnName)) {
-                    noOfLists++;
+                    inLists++;
                 }                
             }
             
-            if(noOfLists == 4) {
+            if(inLists == noOfLists) {
                 pkmnNames.add(currentPkmnName);
             }
             
