@@ -5,16 +5,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Result</h1>
-    <!--
-    <p th:text="'Move 1: ' + ${test.move1}" />
-    <p th:text="'Move 2: ' + ${test.move2}" />
-    <p th:text="'Move 3: ' + ${test.move3}" />
-    <p th:text="'Move 4: ' + ${test.move4}" />
-    -->
-    <tr th:each="searchResult : ${searchResults}">
-        <td th:text="${searchResult.pkmnName}" > 
-    </tr>
+    <h1>Results</h1>
+    <p>These Pokemon can learn the selected moves:</p>
+    <table>
+        <tr th:each="searchResult : ${searchResults}">
+            <td th:text="${searchResult.pkmnName}"></td> 
+        </tr>
+    </table>
     
     <a href="/moves">New Search</a>
 </body> 

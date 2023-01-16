@@ -16,5 +16,10 @@ public class Result {
     public String getPkmnName() {
         return pkmnName;
     }
+
+    @Override
+    public String toString() {
+        return "Result{" + "pkmnName=" + pkmnName + '}';
+    }
     
 }

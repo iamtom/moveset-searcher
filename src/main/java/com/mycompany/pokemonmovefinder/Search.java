@@ -113,7 +113,8 @@ public class Search {
         
         for(int i = 0; i < pkmnThatLearnAllMoves.size(); i++) {
             String pkmnName = pkmnThatLearnAllMoves.get(i);
-            Result result = new Result(pkmnName);           
+            Result result = new Result(pkmnName);
+            results.add(result);
         }
         
         return results;
