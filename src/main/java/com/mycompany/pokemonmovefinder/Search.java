@@ -18,9 +18,11 @@ public class Search {
         this.request = new Request();
     }
     
+    public void setRequestObject(Request request) {
+        this.request = request;
+    }
+    
     public ArrayList<Move> getMovesFromAPI() {
-        //this.request = new Request();
-        
         ArrayList<Move> moves = new ArrayList<>();
         
         //search each move name in the API
@@ -32,60 +34,6 @@ public class Search {
         }
                 
         return moves;
-    }
-    
-    public ArrayList<String> getUniquePkmnNames() {
-        ArrayList<Move> moves = getMovesFromAPI();
-        ArrayList<String> uniquePkmnNames = new ArrayList<>();
-        
-        //for each move get the name of the move then add names
-        //of all the pokemon that can learn it if uniquePkmnNames does not
-        //already contain that name
-        for(int i = 0; i < moves.size(); i++) {
-            Move currentMove = moves.get(i);
-            
-            for(int j = 0; j < currentMove.learnedByPokemon().size(); j++) {
-                String pkmnName = currentMove.learnedByPokemon().get(j).getName();
-                if(!uniquePkmnNames.contains(pkmnName)) {
-                    uniquePkmnNames.add(pkmnName);
-                }
-            }
-        }
-        //System.out.println(uniquePkmnNames);
-        return uniquePkmnNames;
-    }
-    
-    public ArrayList<String> getUniquePkmnURLs() {
-        ArrayList<Move> moves = getMovesFromAPI();
-        ArrayList<String> uniquePkmnURLs = new ArrayList<>();
-        
-        //for each move get the name of the move then add URLs
-        //of all the pokemon that can learn it if uniquePkmnURLs does not
-        //already contain that URL
-        for(int i = 0; i < moves.size(); i++) {
-            Move currentMove = moves.get(i);
-            
-            for(int j = 0; j < currentMove.learnedByPokemon().size(); j++) {
-                String pkmnURL = currentMove.learnedByPokemon().get(j).getUrl();
-                if(!uniquePkmnURLs.contains(pkmnURL)) {
-                    uniquePkmnURLs.add(pkmnURL);
-                }
-            }
-        }
-        //System.out.println(uniquePkmnURLs);
-        return uniquePkmnURLs;
-    }
-    
-    public ArrayList<Pokemon> createPokemonObjects() {
-        ArrayList<Pokemon> pokemonList = new ArrayList<>();
-        ArrayList<String> pkmnNames = this.getUniquePkmnNames();
-        
-        for(int i = 0; i < pkmnNames.size(); i++) {
-            Pokemon pokemon = request.searchPokemon(pkmnNames.get(i));
-            pokemonList.add(pokemon);
-        }
-        System.out.println(pokemonList);
-        return pokemonList;
     }
     
     public ArrayList<Result> getResults() {
@@ -121,7 +69,7 @@ public class Search {
           
     }
 
-    private ArrayList<String> listOfNamesForPkmnThatLearn(Move basicMoveInfo) {
+    public ArrayList<String> listOfNamesForPkmnThatLearn(Move basicMoveInfo) {
         //one ArrayList of pkmn names per move
         ArrayList<String> pkmnThatLearnMove = new ArrayList<>();
         ArrayList<SimpleInfo> learnedByPokemon = basicMoveInfo.learnedByPokemon();
@@ -134,7 +82,7 @@ public class Search {
         return pkmnThatLearnMove;
     }
     
-    private ArrayList<String> pkmnInAllLists(ArrayList<ArrayList<String>> listOfLists) {
+    public ArrayList<String> pkmnInAllLists(ArrayList<ArrayList<String>> listOfLists) {
         int noOfLists = listOfLists.size();
         ArrayList<String> firstList = listOfLists.get(0);
         ArrayList<String> pkmnNames = new ArrayList<>();
