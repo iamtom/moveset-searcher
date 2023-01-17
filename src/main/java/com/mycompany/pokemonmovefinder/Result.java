@@ -1,6 +1,6 @@
 package com.mycompany.pokemonmovefinder;
 
-import java.util.List;
+import com.mycompany.pokeapilibrary.StringFormatter;
 
 
 public class Result {
@@ -10,8 +10,7 @@ public class Result {
     //the pokemon learns some or all of the moves in
     
     public Result(String pkmnName) {
-        this.pkmnName = pkmnName;
-        //TODO format the name nicely
+        this.pkmnName = StringFormatter.basicFormat(pkmnName);
     }
 
     public String getPkmnName() {
