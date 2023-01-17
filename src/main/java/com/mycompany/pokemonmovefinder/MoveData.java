@@ -11,25 +11,33 @@ public class MoveData {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private final String text;
-    private final String value;
-
-    public MoveData(String text, String value) {
-        this.text = text;
-        this.value = value;
+    private String displayText;
+    private String basicText;
+    
+    public MoveData() {
+        
     }
 
-    public String getText() {
-        return text;
+    public MoveData(String displayText, String basicText) {
+        this.displayText = displayText;
+        this.basicText = basicText;
     }
 
-    public String getValue() {
-        return value;
+    public Long getId() {
+        return id;
+    }
+
+    public String getDisplayText() {
+        return displayText;
+    }
+
+    public String getBasicText() {
+        return basicText;
     }
 
     @Override
     public String toString() {
-        return "DropDownItem{" + "text=" + text + ", value=" + value + '}';
+        return "MoveData{" + "displayText=" + displayText + ", basicText=" + basicText + '}';
     }
     
 }

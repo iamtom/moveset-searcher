@@ -22,10 +22,10 @@ public class MoveFinderTools {
         
         ArrayList<MoveData> arrayList = new ArrayList<>();        
         for (int i = 0; i < moveNames.size(); i++) {
-            String value = moveNames.get(i);
-            String text = StringFormatter.basicFormat(value);
+            String basicText = moveNames.get(i);
+            String displayText = StringFormatter.basicFormat(basicText);
             
-            MoveData newItem = new MoveData(text, value);
+            MoveData newItem = new MoveData(displayText, basicText);
             arrayList.add(newItem);
         }
             
