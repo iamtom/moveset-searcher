@@ -1,10 +1,10 @@
 package com.mycompany.pokemonmovefinder;
 
 import com.mycompany.pokeapilibrary.move.Move;
-import com.mycompany.pokeapilibrary.pokemon.Pokemon;
 import com.mycompany.pokeapilibrary.Request;
 import com.mycompany.pokeapilibrary.SimpleInfo;
 import java.util.ArrayList;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -76,12 +76,92 @@ public class SearchTest {
     public void testGetResults() {
         //TODO getResults test
         System.out.println("getResults test");
-        Search instance = null;
-        ArrayList<Result> expResult = null;
-        ArrayList<Result> result = instance.getResults();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        //set up test input
+        MovesInput movesInput = new MovesInput();
+        movesInput.setMove1("test1");
+        movesInput.setMove2("test2");
+        movesInput.setMove3("test3");
+        movesInput.setMove4("test4");
+        
+        //create fake moves with set data
+        SimpleInfo bulbasaurInfo = new SimpleInfo();
+        bulbasaurInfo.setName("bulbasaur");
+        SimpleInfo squirtleInfo = new SimpleInfo();
+        squirtleInfo.setName("squirtle");
+        SimpleInfo charmanderInfo = new SimpleInfo();
+        charmanderInfo.setName("charmander");
+        SimpleInfo pikachuInfo = new SimpleInfo();
+        pikachuInfo.setName("pikachu");
+        SimpleInfo dragoniteInfo = new SimpleInfo();
+        dragoniteInfo.setName("dragonite");
+        
+        ArrayList<SimpleInfo> testMove1LearnedByPokemon = new ArrayList<>();
+        testMove1LearnedByPokemon.add(bulbasaurInfo);
+        testMove1LearnedByPokemon.add(squirtleInfo);
+        testMove1LearnedByPokemon.add(charmanderInfo);
+        
+        ArrayList<SimpleInfo> testMove2LearnedByPokemon = new ArrayList<>();
+        testMove2LearnedByPokemon.add(bulbasaurInfo);
+        testMove2LearnedByPokemon.add(squirtleInfo);
+        testMove2LearnedByPokemon.add(charmanderInfo);
+        testMove2LearnedByPokemon.add(pikachuInfo);
+        
+        ArrayList<SimpleInfo> testMove3LearnedByPokemon = new ArrayList<>();
+        testMove3LearnedByPokemon.add(bulbasaurInfo);
+        testMove3LearnedByPokemon.add(squirtleInfo);
+        testMove3LearnedByPokemon.add(charmanderInfo);
+        testMove3LearnedByPokemon.add(dragoniteInfo);
+        
+        ArrayList<SimpleInfo> testMove4LearnedByPokemon = new ArrayList<>();
+        testMove4LearnedByPokemon.add(bulbasaurInfo);
+        testMove4LearnedByPokemon.add(squirtleInfo);
+        testMove4LearnedByPokemon.add(charmanderInfo);
+        testMove4LearnedByPokemon.add(dragoniteInfo);
+        
+        Move testMove1 = new Move();
+        testMove1.setLearnedByPokemon(testMove1LearnedByPokemon);
+        Move testMove2 = new Move();
+        testMove2.setLearnedByPokemon(testMove2LearnedByPokemon);
+        Move testMove3 = new Move();
+        testMove3.setLearnedByPokemon(testMove3LearnedByPokemon);
+        Move testMove4 = new Move();
+        testMove4.setLearnedByPokemon(testMove4LearnedByPokemon);
+        
+        ArrayList<Move> testMoveList = new ArrayList<>();
+        testMoveList.add(testMove1);
+        testMoveList.add(testMove2);
+        testMoveList.add(testMove3);
+        testMoveList.add(testMove4);
+        //fake moves set-up complete
+        
+        //System.out.println("Test move list: " + testMoveList);      
+
+        Search search = new Search(movesInput);
+        
+        //getResults calls getMovesFromAPI
+        //when getMovesFromAPI uses a Request to get moves the mock will return
+        //the test moves
+        Request mockRequest = mock(Request.class);          
+        when(mockRequest.searchMove(anyString()))
+                .thenReturn(testMove1)
+                .thenReturn(testMove2)
+                .thenReturn(testMove3)
+                .thenReturn(testMove4); 
+        search.setRequestObject(mockRequest);
+        
+        Result result1 = new Result("bulbasaur");
+        Result result2 = new Result("charmander");
+        Result result3 = new Result("squirtle");
+        ArrayList<Result> expResult = new ArrayList<>();
+        expResult.add(result1);
+        expResult.add(result2);
+        expResult.add(result3);
+        
+        ArrayList<Result> result = search.getResults();
+        
+        assertThat(result).usingRecursiveComparison().isEqualTo(expResult);
+
     }
     
     /**
@@ -219,6 +299,5 @@ public class SearchTest {
         ArrayList<String> result = search.pkmnInAllLists(testLists);
         
         assertEquals(expResult, result);
-    }
-    
+    }   
 }

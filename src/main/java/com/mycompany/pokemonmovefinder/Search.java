@@ -3,7 +3,6 @@ package com.mycompany.pokemonmovefinder;
 import com.mycompany.pokeapilibrary.Request;
 import com.mycompany.pokeapilibrary.SimpleInfo;
 import com.mycompany.pokeapilibrary.move.Move;
-import com.mycompany.pokeapilibrary.pokemon.Pokemon;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -36,17 +35,13 @@ public class Search {
         return moves;
     }
     
-    public ArrayList<Result> getResults() {
-        ArrayList<Result> results = new ArrayList<>(); 
-        //find which pokemon can learn each of the moves
-        
+    public ArrayList<Result> getResults() {        
         //get all the moves first
         ArrayList<Move> moveList = this.getMovesFromAPI();      
         
         //for each move get the names of the pokemon that learn it
         //add those names to an ArrayList called 'names'
         //Add each ArrayList to namesOfPkmnThatLearnEachMove
-        //ArrayList of ArrayLists
         ArrayList<ArrayList<String>> namesOfPkmnThatLearnEachMove = new ArrayList<>();
         for (int i = 0; i < moveList.size(); i++) {
             Move currentMove = moveList.get(i);
@@ -59,6 +54,8 @@ public class Search {
         Collections.sort(pkmnThatLearnAllMoves);
         System.out.println("Pokemon that learn these moves: " + pkmnThatLearnAllMoves);
         
+        //build the list of Result objects
+        ArrayList<Result> results = new ArrayList<>(); 
         for(int i = 0; i < pkmnThatLearnAllMoves.size(); i++) {
             String pkmnName = pkmnThatLearnAllMoves.get(i);
             Result result = new Result(pkmnName);
@@ -68,7 +65,7 @@ public class Search {
         return results;
           
     }
-
+    
     public ArrayList<String> listOfNamesForPkmnThatLearn(Move basicMoveInfo) {
         //one ArrayList of pkmn names per move
         ArrayList<String> pkmnThatLearnMove = new ArrayList<>();

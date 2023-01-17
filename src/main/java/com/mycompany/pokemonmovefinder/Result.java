@@ -11,6 +11,7 @@ public class Result {
     
     public Result(String pkmnName) {
         this.pkmnName = pkmnName;
+        //TODO format the name nicely
     }
 
     public String getPkmnName() {

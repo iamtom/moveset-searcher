@@ -14,8 +14,11 @@ public class MoveFinderTools {
   
     }
     
+    //this is to get the move names i.e. "Earthquake" and the value i.e "earthquake"
+    //this is for use in the drop down options which display "Earthquake" but
+    //have the value "earthquake". Capitalised names won't work with the API
     public static ArrayList<MoveData> getArrayListOfMoveDataFromAPI() {
-        ArrayList<String> moveNames = getMoveNamesFromAPI();
+        ArrayList<String> moveNames = getNamesOfAllMovesFromAPI();
         
         ArrayList<MoveData> arrayList = new ArrayList<>();        
         for (int i = 0; i < moveNames.size(); i++) {
@@ -29,7 +32,7 @@ public class MoveFinderTools {
         return arrayList;
     }
     
-    public static ArrayList<String> getMoveNamesFromAPI() {
+    public static ArrayList<String> getNamesOfAllMovesFromAPI() {
         Request request = new Request();
         PagesOfMoves moves = request.allMoves(0, 844);
         ArrayList<SimpleInfo> results = moves.getResults();
