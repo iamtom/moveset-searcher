@@ -52,7 +52,6 @@ public class Search {
         //now compare lists to find which pokemon can learn all the moves
         ArrayList<String> pkmnThatLearnAllMoves = this.pkmnInAllLists(namesOfPkmnThatLearnEachMove);
         Collections.sort(pkmnThatLearnAllMoves);
-        System.out.println("Pokemon that learn these moves: " + pkmnThatLearnAllMoves);
         
         //build the list of Result objects
         ArrayList<Result> results = new ArrayList<>(); 
@@ -106,6 +105,5 @@ public class Search {
         }
         
         return pkmnNames;
-    }
-    
+    }   
 }

@@ -3,20 +3,14 @@
 <head> 
     <title>Pokémon Move Finder</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 <body>
-    <h1>Search</h1>
-    <!--
-    <form action="#" th:action="@{/moves}" th:object="${movesInput}" method="post">
-    	<p>Move 1: <input type="text" th:field="*{move1}"/></p>
-        <p>Move 2: <input type="text" th:field="*{move2}" /></p>
-        <p>Move 3: <input type="text" th:field="*{move3}" /></p>
-        <p>Move 4: <input type="text" th:field="*{move4}" /></p>      
-        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-    </form>
-    -->
+    <h1>Pokémon Move Finder</h1>
+    <p>How to use: select up to four moves. Click 'submit' to see which Pokémon
+        can learn all of the chosen moves</p>
         
-    <form action="#" th:action="@{/moves}" th:object="${movesInput}" method="post">
+    <form action="#" th:action="@{/movefinder}" th:object="${movesInput}" method="post">
     	<p>
             <select th:field="*{move1}">
                 <option default value=""></option>

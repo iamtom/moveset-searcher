@@ -15,23 +15,17 @@ public class MainController {
     @Autowired
     MoveDataRepository moveDataRepository;
 
-    @GetMapping("/moves")
+    @GetMapping("/movefinder")
     public String movesForm(Model model) {
         ArrayList<MoveData> moveSelectList = moveDataRepository.findAll();
        
         model.addAttribute("movesInput", new MovesInput());
         model.addAttribute("moveSelectList", moveSelectList);
-        return "moves";
+        return "movefinder";
     }
 
-    @PostMapping("/moves")
+    @PostMapping("/movefinder")
     public String movesSubmit(@ModelAttribute MovesInput movesInput, Model model) {       
-        System.out.println("Moves selected:");
-        System.out.println(movesInput.getMove1());
-        System.out.println(movesInput.getMove2());
-        System.out.println(movesInput.getMove3());
-        System.out.println(movesInput.getMove4());
-        
         Search search = new Search(movesInput);
         ArrayList<Result> searchResults = search.getResults();
         model.addAttribute("searchResults", searchResults);       
