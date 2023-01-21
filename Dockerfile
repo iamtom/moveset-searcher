@@ -1,7 +1,7 @@
-FROM maven:3.8.7-jdk-11 AS build
+FROM eclipse-temurin:11 AS build
 COPY . .
 RUN mvn clean package
 
-FROM openjdk:11-jdk-slim
+FROM eclipse-temurin:11
 COPY --from=build /target/pokemonmovefinder-0.0.1-SNAPSHOT.jar pokemonmovefinder.jar
 ENTRYPOINT ["java","-jar","pokemonmovefinder-0.0.1-SNAPSHOT.jar"]
