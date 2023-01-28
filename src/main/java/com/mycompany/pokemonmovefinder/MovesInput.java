@@ -5,9 +5,13 @@ import java.util.ArrayList;
 
 public class MovesInput {
     
+    @ValidateMovesInput
     private String move1;
+    @ValidateMovesInput
     private String move2;
+    @ValidateMovesInput
     private String move3;
+    @ValidateMovesInput
     private String move4;
 
     public String getMove1() {
