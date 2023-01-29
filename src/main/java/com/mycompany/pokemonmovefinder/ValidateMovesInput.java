@@ -15,7 +15,7 @@ import javax.validation.Payload;
 public @interface ValidateMovesInput {
     public String message() default "Invalid input";
     
-    public Class<?>[] groups() default {};
+    Class<?>[] groups() default {};
 
-    public Class<? extends Payload>[] payload() default {};
+    Class<? extends Payload>[] payload() default {};
 }

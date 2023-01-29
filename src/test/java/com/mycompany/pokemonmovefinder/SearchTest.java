@@ -74,7 +74,6 @@ public class SearchTest {
      */
     @Test
     public void testGetResults() {
-        //TODO getResults test
         System.out.println("getResults test");
         
         //set up test input
@@ -133,9 +132,7 @@ public class SearchTest {
         testMoveList.add(testMove2);
         testMoveList.add(testMove3);
         testMoveList.add(testMove4);
-        //fake moves set-up complete
-        
-        //System.out.println("Test move list: " + testMoveList);      
+        //fake moves set-up complete    
 
         Search search = new Search(movesInput);
         

@@ -12,13 +12,11 @@ public class MovesInputValidator implements ConstraintValidator<ValidateMovesInp
     @Override
     public boolean isValid(String move, ConstraintValidatorContext cvc) {
         ArrayList<MoveData> moveSelectList = moveDataRepository.findAll();
-        
-        boolean validity = true;
-        
-        //TODO: why is this always returning false?
-        //search works without isBlank
-        if(moveSelectList.contains(move) || move.isBlank()){
-            validity = false;
+
+        boolean validity = false;
+
+        if(moveSelectList.stream().anyMatch(o -> move.equals(o.getBasicText())) || move.isBlank()){
+            validity = true;
         }
         
         return validity;
