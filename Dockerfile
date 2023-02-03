@@ -12,4 +12,4 @@ FROM openjdk:11-jdk-slim
 COPY --from=build /target/pokemonmovefinder-0.0.1-SNAPSHOT.jar pokemonmovefinder.jar
 # ENV PORT=8080
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","pokemonmovefinder-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","pokemonmovefinder.jar"]
