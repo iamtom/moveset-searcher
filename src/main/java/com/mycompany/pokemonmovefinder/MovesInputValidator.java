@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class MovesInputValidator implements ConstraintValidator<ValidateMovesInput,String> {
     @Autowired
-    MoveDataRepository moveDataRepository;
+    MoveSelectDataRepository moveSelectDataRepository;
     
     @Override
     public boolean isValid(String move, ConstraintValidatorContext cvc) {
-        ArrayList<MoveData> moveSelectList = moveDataRepository.findAll();
+        ArrayList<MoveSelectData> moveSelectList = moveSelectDataRepository.findAll();
 
         boolean validity = false;
 

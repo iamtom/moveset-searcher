@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class MainController {
     @Autowired
-    MoveDataRepository moveDataRepository;
+    MoveSelectDataRepository moveSelectDataRepository;
 
     @GetMapping("/")
     public String movesForm(Model model) {
-        ArrayList<MoveData> moveSelectList = moveDataRepository.findAll();
+        ArrayList<MoveSelectData> moveSelectList = moveSelectDataRepository.findAll();
        
         model.addAttribute("movesInput", new MovesInput());
         model.addAttribute("moveSelectList", moveSelectList);

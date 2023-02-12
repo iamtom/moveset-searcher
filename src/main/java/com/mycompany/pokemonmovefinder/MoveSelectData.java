@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class MoveData {
+public class MoveSelectData {
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -14,11 +14,11 @@ public class MoveData {
     private String displayText;
     private String basicText;
     
-    public MoveData() {
+    public MoveSelectData() {
         
     }
 
-    public MoveData(String displayText, String basicText) {
+    public MoveSelectData(String displayText, String basicText) {
         this.displayText = displayText;
         this.basicText = basicText;
     }
@@ -37,7 +37,7 @@ public class MoveData {
 
     @Override
     public String toString() {
-        return "MoveData{" + "displayText=" + displayText + ", basicText=" + basicText + '}';
+        return "MoveSelectData{" + "displayText=" + displayText + ", basicText=" + basicText + '}';
     }
     
 }
