@@ -7,14 +7,13 @@
     </head>
     <body>
         <h1>Pokémon Move Finder</h1>
-        <p>These Pokemon can learn the selected moves:
+        <p>These Pokemon can learn the selected moves:</p>
         <table>
             <tr th:each="searchResult : ${searchResults}">
                 <td th:text="${searchResult.pkmnName}"></td> 
             </tr>
         </table>
-    </p>
-
-    <a href="/">New Search</a>
-</body> 
+        <br>
+        <a href="/">New Search</a>
+    </body> 
 </html>

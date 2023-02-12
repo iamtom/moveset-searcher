@@ -13,7 +13,21 @@ public class Search {
 
     public Search(MovesInput movesInput) {
         this.moveNames = new ArrayList<>();
-        this.moveNames = movesInput.asArrayList();
+
+        if (!movesInput.getMove1().equals("")) {
+            moveNames.add(movesInput.getMove1());
+        }
+        if (!movesInput.getMove2().equals("")) {
+            moveNames.add(movesInput.getMove2());
+        }
+        if (!movesInput.getMove3().equals("")) {
+            moveNames.add(movesInput.getMove3());
+        }
+        if (!movesInput.getMove4().equals("")) {
+            moveNames.add(movesInput.getMove4());
+        }
+
+        //this.moveNames = movesInput.asArrayList();
         this.request = new Request();
     }
 
