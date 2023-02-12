@@ -16,7 +16,7 @@ public class MainController {
     @Autowired
     MoveDataRepository moveDataRepository;
 
-    @GetMapping("/movefinder")
+    @GetMapping("/")
     public String movesForm(Model model) {
         ArrayList<MoveData> moveSelectList = moveDataRepository.findAll();
        
@@ -25,7 +25,7 @@ public class MainController {
         return "movefinder";
     }
 
-    @PostMapping("/movefinder")
+    @PostMapping("/")
     public String movesSubmit(@Valid @ModelAttribute MovesInput movesInput, 
             BindingResult bindingResult, Model model) {   
         if(bindingResult.hasErrors()){
