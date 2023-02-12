@@ -13,8 +13,9 @@ import javax.validation.Payload;
 @Documented
 @Constraint(validatedBy = MovesInputValidator.class)
 public @interface ValidateMovesInput {
+
     public String message() default "Invalid input";
-    
+
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};

@@ -7,15 +7,15 @@ import javax.persistence.Id;
 
 @Entity
 public class MoveSelectData {
-    
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String displayText;
     private String basicText;
-    
+
     public MoveSelectData() {
-        
+
     }
 
     public MoveSelectData(String displayText, String basicText) {
@@ -39,5 +39,5 @@ public class MoveSelectData {
     public String toString() {
         return "MoveSelectData{" + "displayText=" + displayText + ", basicText=" + basicText + '}';
     }
-    
+
 }
