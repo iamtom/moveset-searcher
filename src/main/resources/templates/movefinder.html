@@ -16,9 +16,7 @@
                     <td>
                         <select th:field="*{move1}">
                             <option default value=""></option>
-                            <option th:each="dropDownItem : ${moveSelectList}"
-                                    th:value="${dropDownItem.basicText}"
-                                    th:text="${dropDownItem.displayText}" />
+                            <option th:replace="fragments :: moveSelectDropDown"/>
                         </select>
                     </td>
                     <td th:if="${#fields.hasErrors('move1')}" th:errors="*{move1}">Move 1 Error</td>
@@ -27,9 +25,7 @@
                     <td>
                         <select th:field="*{move2}">
                             <option default value=""></option>
-                            <option th:each="dropDownItem : ${moveSelectList}"
-                                    th:value="${dropDownItem.basicText}"
-                                    th:text="${dropDownItem.displayText}" />
+                            <option th:replace="fragments :: moveSelectDropDown"/>
                         </select>
                     </td>
                     <td th:if="${#fields.hasErrors('move2')}" th:errors="*{move2}">Move 2 Error</td>
@@ -38,9 +34,7 @@
                     <td>
                         <select th:field="*{move3}">
                             <option default value=""></option>
-                            <option th:each="dropDownItem : ${moveSelectList}"
-                                    th:value="${dropDownItem.basicText}"
-                                    th:text="${dropDownItem.displayText}" />
+                            <option th:replace="fragments :: moveSelectDropDown"/>
                         </select>
                     </td>
                     <td th:if="${#fields.hasErrors('move3')}" th:errors="*{move3}">Move 3 Error</td>
@@ -49,9 +43,7 @@
                     <td>
                         <select th:field="*{move4}">
                             <option default value=""></option>
-                            <option th:each="dropDownItem : ${moveSelectList}"
-                                    th:value="${dropDownItem.basicText}"
-                                    th:text="${dropDownItem.displayText}" />
+                            <option th:replace="fragments :: moveSelectDropDown"/>
                         </select>
                     </td>
                     <td th:if="${#fields.hasErrors('move4')}" th:errors="*{move4}">Move 4 Error</td>

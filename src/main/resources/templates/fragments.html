@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <option th:fragment="moveSelectDropDown" th:each="dropDownItem : ${moveSelectList}"
+                th:value="${dropDownItem.basicText}"
+                th:text="${dropDownItem.displayText}" />
+    </body>
+</html>
