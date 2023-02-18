@@ -6,7 +6,6 @@ import com.mycompany.pokeapilibrary.StringFormatter;
 import com.mycompany.pokeapilibrary.move.PagesOfMoves;
 import com.mycompany.pokemonmovefinder.MoveSelectData;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class MoveSelectDataLoader {
