@@ -2,7 +2,7 @@ package com.mycompany.pokemonmovefinder;
 
 import com.mycompany.pokeapilibrary.move.Move;
 import com.mycompany.pokeapilibrary.Request;
-import com.mycompany.pokeapilibrary.SimpleInfo;
+import com.mycompany.pokeapilibrary.NamedAPIResource;
 import java.util.ArrayList;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.AfterEach;
@@ -84,35 +84,35 @@ public class SearchTest {
         movesInput.setMove4("test4");
 
         //create fake moves with set data
-        SimpleInfo bulbasaurInfo = new SimpleInfo();
+        NamedAPIResource bulbasaurInfo = new NamedAPIResource();
         bulbasaurInfo.setName("bulbasaur");
-        SimpleInfo squirtleInfo = new SimpleInfo();
+        NamedAPIResource squirtleInfo = new NamedAPIResource();
         squirtleInfo.setName("squirtle");
-        SimpleInfo charmanderInfo = new SimpleInfo();
+        NamedAPIResource charmanderInfo = new NamedAPIResource();
         charmanderInfo.setName("charmander");
-        SimpleInfo pikachuInfo = new SimpleInfo();
+        NamedAPIResource pikachuInfo = new NamedAPIResource();
         pikachuInfo.setName("pikachu");
-        SimpleInfo dragoniteInfo = new SimpleInfo();
+        NamedAPIResource dragoniteInfo = new NamedAPIResource();
         dragoniteInfo.setName("dragonite");
 
-        ArrayList<SimpleInfo> testMove1LearnedByPokemon = new ArrayList<>();
+        ArrayList<NamedAPIResource> testMove1LearnedByPokemon = new ArrayList<>();
         testMove1LearnedByPokemon.add(bulbasaurInfo);
         testMove1LearnedByPokemon.add(squirtleInfo);
         testMove1LearnedByPokemon.add(charmanderInfo);
 
-        ArrayList<SimpleInfo> testMove2LearnedByPokemon = new ArrayList<>();
+        ArrayList<NamedAPIResource> testMove2LearnedByPokemon = new ArrayList<>();
         testMove2LearnedByPokemon.add(bulbasaurInfo);
         testMove2LearnedByPokemon.add(squirtleInfo);
         testMove2LearnedByPokemon.add(charmanderInfo);
         testMove2LearnedByPokemon.add(pikachuInfo);
 
-        ArrayList<SimpleInfo> testMove3LearnedByPokemon = new ArrayList<>();
+        ArrayList<NamedAPIResource> testMove3LearnedByPokemon = new ArrayList<>();
         testMove3LearnedByPokemon.add(bulbasaurInfo);
         testMove3LearnedByPokemon.add(squirtleInfo);
         testMove3LearnedByPokemon.add(charmanderInfo);
         testMove3LearnedByPokemon.add(dragoniteInfo);
 
-        ArrayList<SimpleInfo> testMove4LearnedByPokemon = new ArrayList<>();
+        ArrayList<NamedAPIResource> testMove4LearnedByPokemon = new ArrayList<>();
         testMove4LearnedByPokemon.add(bulbasaurInfo);
         testMove4LearnedByPokemon.add(squirtleInfo);
         testMove4LearnedByPokemon.add(charmanderInfo);
@@ -168,14 +168,14 @@ public class SearchTest {
     public void testListOfNamesForPkmnThatLearn() {
         System.out.println("listOfNamesForPkmnThatLearn test");
 
-        SimpleInfo bulbasaurInfo = new SimpleInfo();
+        NamedAPIResource bulbasaurInfo = new NamedAPIResource();
         bulbasaurInfo.setName("bulbasaur");
-        SimpleInfo squirtleInfo = new SimpleInfo();
+        NamedAPIResource squirtleInfo = new NamedAPIResource();
         squirtleInfo.setName("squirtle");
-        SimpleInfo charmanderInfo = new SimpleInfo();
+        NamedAPIResource charmanderInfo = new NamedAPIResource();
         charmanderInfo.setName("charmander");
 
-        ArrayList<SimpleInfo> testLearnedByPokemon = new ArrayList<>();
+        ArrayList<NamedAPIResource> testLearnedByPokemon = new ArrayList<>();
         testLearnedByPokemon.add(bulbasaurInfo);
         testLearnedByPokemon.add(squirtleInfo);
         testLearnedByPokemon.add(charmanderInfo);

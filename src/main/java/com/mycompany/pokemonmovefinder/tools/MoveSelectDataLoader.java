@@ -1,9 +1,9 @@
 package com.mycompany.pokemonmovefinder.tools;
 
+import com.mycompany.pokeapilibrary.NamedAPIResource;
+import com.mycompany.pokeapilibrary.NamedAPIResourceList;
 import com.mycompany.pokeapilibrary.Request;
-import com.mycompany.pokeapilibrary.SimpleInfo;
 import com.mycompany.pokeapilibrary.StringFormatter;
-import com.mycompany.pokeapilibrary.move.PagesOfMoves;
 import com.mycompany.pokemonmovefinder.MoveSelectData;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -17,17 +17,17 @@ public class MoveSelectDataLoader {
         long start = System.nanoTime();
 
         Request request = new Request();
-        PagesOfMoves pagesOfMoves = request.allMoves(0, 844);
-        ArrayList<SimpleInfo> moves = pagesOfMoves.getResults();
+        NamedAPIResourceList pagesOfMoves = request.allMovesList(0, 844);
+        ArrayList<NamedAPIResource> moves = pagesOfMoves.getResults();
 
         ArrayList<MoveSelectData> moveSelectDataList = new ArrayList<MoveSelectData>();
 
         for (int i = 0; i < moves.size(); i++) {
-            SimpleInfo simpleInfo = moves.get(i);
+            NamedAPIResource move = moves.get(i);
 
             MoveSelectData moveSelectData = new MoveSelectData(
-                    StringFormatter.basicFormat(simpleInfo.getName()),
-                    simpleInfo.getName());
+                    StringFormatter.basicFormat(move.getName()),
+                    move.getName());
 
             moveSelectDataList.add(moveSelectData);
         }

@@ -1,7 +1,7 @@
 package com.mycompany.pokemonmovefinder;
 
+import com.mycompany.pokeapilibrary.NamedAPIResource;
 import com.mycompany.pokeapilibrary.Request;
-import com.mycompany.pokeapilibrary.SimpleInfo;
 import com.mycompany.pokeapilibrary.move.Move;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -79,10 +79,10 @@ public class Search {
 
     }
 
-    public ArrayList<String> listOfNamesForPkmnThatLearn(Move basicMoveInfo) {
+    public ArrayList<String> listOfNamesForPkmnThatLearn(Move move) {
         //one ArrayList of pkmn names per move
         ArrayList<String> pkmnThatLearnMove = new ArrayList<>();
-        ArrayList<SimpleInfo> learnedByPokemon = basicMoveInfo.learnedByPokemon();
+        ArrayList<NamedAPIResource> learnedByPokemon = move.learnedByPokemon();
 
         for (int i = 0; i < learnedByPokemon.size(); i++) {
             String name = learnedByPokemon.get(i).getName();
