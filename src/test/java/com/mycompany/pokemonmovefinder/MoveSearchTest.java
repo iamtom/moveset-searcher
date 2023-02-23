@@ -3,6 +3,7 @@ package com.mycompany.pokemonmovefinder;
 import com.mycompany.pokeapilibrary.move.Move;
 import com.mycompany.pokeapilibrary.Request;
 import com.mycompany.pokeapilibrary.NamedAPIResource;
+import com.mycompany.pokeapilibrary.pokemon.Pokemon;
 import java.util.ArrayList;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.AfterEach;
@@ -41,6 +42,8 @@ public class MoveSearchTest {
      */
     @Test
     public void testGetResults() {
+        //TODO: fix this test. getResults() is now returning null (only in test
+        //but works fine normally)
         System.out.println("getResults test");
 
         //set up test input
@@ -110,17 +113,17 @@ public class MoveSearchTest {
 
         //getResults calls getMovesFromAPI
         //when getMovesFromAPI uses a Request to get moves the mock will return
-        //the test moves
-        
-        //this needs to change. cant access searchMove now it is in a private method
+        //the test moves       
         Request mockRequest = mock(Request.class);
         when(mockRequest.searchMove(anyString()))
                 .thenReturn(testMove1)
                 .thenReturn(testMove2)
                 .thenReturn(testMove3)
                 .thenReturn(testMove4);
+        
+        Pokemon mockPokemon = mock(Pokemon.class);
+        
         search.setRequestObject(mockRequest);
-
 
         Result result1 = new Result("bulbasaur");
         Result result2 = new Result("charmander");
