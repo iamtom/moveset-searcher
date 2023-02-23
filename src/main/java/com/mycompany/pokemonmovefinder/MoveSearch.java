@@ -37,12 +37,12 @@ public class MoveSearch implements Searcher {
     }
 
     public ArrayList<Result> getResults() {
-        //get all the pokemonMoves first
+        //get all the moves first
         ArrayList<Move> moveList = this.getMovesFromAPI();
 
         ArrayList<ArrayList<String>> listsOfPkmnThatLearnEachMove = this.listsOfPkmnThatLearnEachMove(moveList);
 
-        //now compare lists to find which pokemon can learn all the pokemonMoves
+        //now compare lists to find which pokemon can learn all the moves
         ArrayList<String> pkmnThatLearnAllMoves = this.pkmnInAllLists(listsOfPkmnThatLearnEachMove);
         Collections.sort(pkmnThatLearnAllMoves);
 
@@ -64,7 +64,7 @@ public class MoveSearch implements Searcher {
         ArrayList<Move> moves = new ArrayList<>();
 
         //search each move name in the API
-        //add resulting Move object to pokemonMoves ArrayList
+        //add resulting Move object to moves ArrayList
         for (int i = 0; i < this.moveNames.size(); i++) {
             String searchFor = this.moveNames.get(i);
             Move move = this.request.searchMove(searchFor);
@@ -125,7 +125,7 @@ public class MoveSearch implements Searcher {
         ArrayList<String> pkmnNames = new ArrayList<>();
 
         //work through first list, if the pokemon name is in all the other lists
-        //then we know it can learn all the pokemonMoves
+        //then we know it can learn all the moves
         for (int i = 0; i < firstList.size(); i++) {
             String currentPkmnName = firstList.get(i);
 
