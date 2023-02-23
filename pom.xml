@@ -59,7 +59,7 @@
             	<dependency>
                         <groupId>com.github.iamtom</groupId>
                         <artifactId>poke-api-library</artifactId>
-                        <version>d20ba54</version>
+                        <version>026289a</version>
                 </dependency>             
                 <dependency>
                         <groupId>org.mockito</groupId>

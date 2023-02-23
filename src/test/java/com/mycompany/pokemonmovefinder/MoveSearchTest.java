@@ -47,7 +47,7 @@ public class MoveSearchTest {
         System.out.println("getResults test");
 
         //set up test input
-        MovesInput movesInput = new MovesInput();
+        MovesInputDTO movesInput = new MovesInputDTO();
         movesInput.setMove1("test1");
         movesInput.setMove2("test2");
         movesInput.setMove3("test3");

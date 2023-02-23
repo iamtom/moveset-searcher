@@ -1,5 +1,6 @@
 package com.mycompany.pokemonmovefinder;
 
+import com.mycompany.pokeapilibrary.move.Move;
 import java.util.ArrayList;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +21,22 @@ public class MainController {
     public String movesForm(Model model) {
         ArrayList<MoveSelectData> moveSelectList = moveSelectDataRepository.findAll();
 
-        model.addAttribute("movesInput", new MovesInput());
+        model.addAttribute("movesInput", new MovesInputDTO());
         model.addAttribute("moveSelectList", moveSelectList);
         return "movefinder";
     }
 
     @PostMapping("/")
-    public String movesSubmit(@Valid @ModelAttribute MovesInput movesInput,
+    public String movesSubmit(@Valid @ModelAttribute MovesInputDTO movesInput,
             BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "movefinder";
         }
-
-        MoveSearch search = new MoveSearch(movesInput);
+        
+        Mapper mapper = new Mapper();
+        System.out.println("Moves input " + movesInput);
+        ArrayList<Move> moveList = mapper.toMoveList(movesInput);
+        MoveSearch search = new MoveSearch(moveList);
         ArrayList<Result> searchResults = search.getResults();
         model.addAttribute("searchResults", searchResults);
 

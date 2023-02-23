@@ -1,6 +1,6 @@
 package com.mycompany.pokemonmovefinder;
 
-public class MovesInput {
+public class MovesInputDTO {
 
     @ValidateMovesInput
     private String move1;
