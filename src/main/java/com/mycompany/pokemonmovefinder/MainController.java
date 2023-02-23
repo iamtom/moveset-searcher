@@ -32,7 +32,7 @@ public class MainController {
             return "movefinder";
         }
 
-        Search search = new Search(movesInput);
+        MoveSearch search = new MoveSearch(movesInput);
         ArrayList<Result> searchResults = search.getResults();
         model.addAttribute("searchResults", searchResults);
 
