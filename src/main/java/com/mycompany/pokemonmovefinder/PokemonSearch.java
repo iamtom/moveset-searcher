@@ -8,12 +8,12 @@ import com.mycompany.pokeapilibrary.pokemon.PokemonMove;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class SearchPokemon implements Searcher {
+public class PokemonSearch implements Searcher {
 
     private final ArrayList<Move> moveList;
     private Request request;
 
-    public SearchPokemon(ArrayList<Move> moveList) {
+    public PokemonSearch(ArrayList<Move> moveList) {
         this.moveList = moveList;
         this.request = new Request();
     }
