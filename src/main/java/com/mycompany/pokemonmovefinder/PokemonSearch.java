@@ -19,35 +19,30 @@ public class PokemonSearch implements Searcher {
         this.itemMatch = new ItemMatch();
     }
 
-    public void setRequestObject(Request request) {
-        this.request = request;
-    }
-
     public ArrayList<Result> getResults() {
-        ArrayList<String> pkmnThatLearnAllMoves = 
-                            this.itemMatch.pkmnThatLearnAllMoves(this.moveList);
-        
+        ArrayList<String> pkmnThatLearnAllMoves
+                = this.itemMatch.pkmnThatLearnAllMoves(this.moveList);
+
         Collections.sort(pkmnThatLearnAllMoves);
 
-        ArrayList<String> moveNames = new ArrayList<>();
-        for (int i = 0; i < this.moveList.size(); i++) {
-            moveNames.add(moveList.get(i).getName());
-        }
-        
         ArrayList<Pokemon> pokemonObjects = this.getPokemonObjects(pkmnThatLearnAllMoves);
-       
+
         ArrayList<Result> results = new ArrayList<>();
         for (Pokemon pokemon : pokemonObjects) {
-            ArrayList<PokemonMove> pokemonMoves = this.getPokemonMoves(pokemon, moveNames);
+            ArrayList<PokemonMove> pokemonMoves = this.getPokemonMoves(pokemon);
             Result result = new Result(pokemon.getName(), pokemonMoves);
             results.add(result);
         }
 
         return results;
-
     }
 
-    private ArrayList<PokemonMove> getPokemonMoves(Pokemon pokemon, ArrayList<String> moveNames) {
+    private ArrayList<PokemonMove> getPokemonMoves(Pokemon pokemon) {
+        ArrayList<String> moveNames = new ArrayList<>();
+        for (int i = 0; i < this.moveList.size(); i++) {
+            moveNames.add(moveList.get(i).getName());
+        }
+
         ArrayList<PokemonMove> allMoves = pokemon.getMoves();
         ArrayList<PokemonMove> movesWanted = new ArrayList<PokemonMove>();
 
@@ -74,5 +69,13 @@ public class PokemonSearch implements Searcher {
         }
 
         return pokemonObjects;
+    }
+    
+    public void setRequestObject(Request request) {
+        this.request = request;
+    }
+
+    public void setItemMatch(ItemMatch itemMatch) {
+        this.itemMatch = itemMatch;
     }
 }

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -45,77 +45,26 @@ public class PokemonSearchTest {
         //TODO: fix this test. getResults() is now returning null (only in test
         //but works fine normally)
         System.out.println("getResults test");
-
-        //set up test input
-        MovesInputDTO movesInput = new MovesInputDTO();
-        movesInput.setMove1("test1");
-        movesInput.setMove2("test2");
-        movesInput.setMove3("test3");
-        movesInput.setMove4("test4");
-
-        //create fake moves with set data
-        //first create fake NamedAPIResource with just Pokemon names
-        NamedAPIResource bulbasaurInfo = new NamedAPIResource();
-        bulbasaurInfo.setName("bulbasaur");
-        NamedAPIResource squirtleInfo = new NamedAPIResource();
-        squirtleInfo.setName("squirtle");
-        NamedAPIResource charmanderInfo = new NamedAPIResource();
-        charmanderInfo.setName("charmander");
-        NamedAPIResource pikachuInfo = new NamedAPIResource();
-        pikachuInfo.setName("pikachu");
-        NamedAPIResource dragoniteInfo = new NamedAPIResource();
-        dragoniteInfo.setName("dragonite");
-
-        //add those to ArrayLists. These basically represent lists of Pokemon 
-        //that learn each test move
-        ArrayList<NamedAPIResource> testMove1LearnedByPokemon = new ArrayList<>();
-        testMove1LearnedByPokemon.add(bulbasaurInfo);
-        testMove1LearnedByPokemon.add(squirtleInfo);
-        testMove1LearnedByPokemon.add(charmanderInfo);
         
-        ArrayList<NamedAPIResource> testMove2LearnedByPokemon = new ArrayList<>();
-        testMove2LearnedByPokemon.add(bulbasaurInfo);
-        testMove2LearnedByPokemon.add(squirtleInfo);
-        testMove2LearnedByPokemon.add(charmanderInfo);
-        testMove2LearnedByPokemon.add(pikachuInfo);
+        ArrayList<String> fakePkmnThatLearnAllMoves = new ArrayList<>();
+        fakePkmnThatLearnAllMoves.add("bulbasaur");
+        fakePkmnThatLearnAllMoves.add("squirtle");
+        fakePkmnThatLearnAllMoves.add("charmander");
+  
 
-        ArrayList<NamedAPIResource> testMove3LearnedByPokemon = new ArrayList<>();
-        testMove3LearnedByPokemon.add(bulbasaurInfo);
-        testMove3LearnedByPokemon.add(squirtleInfo);
-        testMove3LearnedByPokemon.add(charmanderInfo);
-        testMove3LearnedByPokemon.add(dragoniteInfo);
 
-        ArrayList<NamedAPIResource> testMove4LearnedByPokemon = new ArrayList<>();
-        testMove4LearnedByPokemon.add(bulbasaurInfo);
-        testMove4LearnedByPokemon.add(squirtleInfo);
-        testMove4LearnedByPokemon.add(charmanderInfo);
-        testMove4LearnedByPokemon.add(dragoniteInfo);
+        PokemonSearch search = new PokemonSearch(testMoveList);
         
-        //create fake Moves and add the fake lists of pokemon that learn them
-        Move testMove1 = new Move();
-        testMove1.setLearnedByPokemon(testMove1LearnedByPokemon);
-        Move testMove2 = new Move();
-        testMove2.setLearnedByPokemon(testMove2LearnedByPokemon);
-        Move testMove3 = new Move();
-        testMove3.setLearnedByPokemon(testMove3LearnedByPokemon);
-        Move testMove4 = new Move();
-        testMove4.setLearnedByPokemon(testMove4LearnedByPokemon);
-        
-        
-        ArrayList<Move> testMoveList = new ArrayList<>();
-        testMoveList.add(testMove1);
-        testMoveList.add(testMove2);
-        testMoveList.add(testMove3);
-        testMoveList.add(testMove4);
-        //fake moves set-up complete    
-
-        PokemonSearch search = new PokemonSearch(movesInput);
+        ItemMatch mockItemMatch = mock(ItemMatch.class);
+        search.setItemMatch(mockItemMatch);
+        when(mockItemMatch.pkmnThatLearnAllMoves(any()))
+                .thenReturn(fakePkmnThatLearnAllMoves);
 
         //getResults calls getMovesFromAPI
         //when getMovesFromAPI uses a Request to get moves the mock will return
         //the test moves       
         Request mockRequest = mock(Request.class);
-        when(mockRequest.searchMove(anyString()))
+        when(mockRequest.searchPokemon(anyString()))
                 .thenReturn(testMove1)
                 .thenReturn(testMove2)
                 .thenReturn(testMove3)
