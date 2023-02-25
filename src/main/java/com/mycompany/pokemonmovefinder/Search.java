@@ -2,7 +2,7 @@ package com.mycompany.pokemonmovefinder;
 
 import java.util.ArrayList;
 
-public interface Searcher {
+public interface Search {
 
     ArrayList<Result> getResults();
     

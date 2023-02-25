@@ -7,7 +7,7 @@ import com.mycompany.pokeapilibrary.pokemon.PokemonMove;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class PokemonSearch implements Searcher {
+public class PokemonSearch implements Search {
 
     private final ArrayList<Move> moveList;
     private ItemMatch itemMatch;
@@ -27,9 +27,14 @@ public class PokemonSearch implements Searcher {
 
         ArrayList<Pokemon> pokemonObjects = this.getPokemonObjects(pkmnThatLearnAllMoves);
 
+        ArrayList<String> moveNames = new ArrayList<>();
+        for (int i = 0; i < this.moveList.size(); i++) {
+            moveNames.add(moveList.get(i).getName());
+        }        
+        
         ArrayList<Result> results = new ArrayList<>();
         for (Pokemon pokemon : pokemonObjects) {
-            ArrayList<PokemonMove> pokemonMoves = this.getPokemonMoves(pokemon);
+            ArrayList<PokemonMove> pokemonMoves = this.getPokemonMoves(pokemon, moveNames);
             Result result = new Result(pokemon.getName(), pokemonMoves);
             results.add(result);
         }
@@ -37,12 +42,7 @@ public class PokemonSearch implements Searcher {
         return results;
     }
 
-    private ArrayList<PokemonMove> getPokemonMoves(Pokemon pokemon) {
-        ArrayList<String> moveNames = new ArrayList<>();
-        for (int i = 0; i < this.moveList.size(); i++) {
-            moveNames.add(moveList.get(i).getName());
-        }
-
+    private ArrayList<PokemonMove> getPokemonMoves(Pokemon pokemon, ArrayList<String> moveNames) {
         ArrayList<PokemonMove> allMoves = pokemon.getMoves();
         ArrayList<PokemonMove> movesWanted = new ArrayList<PokemonMove>();
 

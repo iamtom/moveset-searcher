@@ -1,7 +1,6 @@
 package com.mycompany.pokemonmovefinder;
 
 import com.mycompany.pokeapilibrary.NamedAPIResource;
-import com.mycompany.pokeapilibrary.Request;
 import com.mycompany.pokeapilibrary.move.Move;
 import java.util.ArrayList;
 import org.junit.jupiter.api.AfterEach;
@@ -10,11 +9,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class ItemMatchTest {
+    
+    private ArrayList<Move> testMoveList;
     
     public ItemMatchTest() {
     }
@@ -29,18 +27,6 @@ public class ItemMatchTest {
     
     @BeforeEach
     public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
-
-    /**
-     * Test of pkmnThatLearnAllMoves method, of class ItemMatch.
-     */
-    @Test
-    public void testPkmnThatLearnAllMoves() {
-        System.out.println("testing pkmnThatLearnAllMoves");
         //create fake moves with set data
         //first create fake NamedAPIResource with just Pokemon names
         NamedAPIResource bulbasaurInfo = new NamedAPIResource();
@@ -90,15 +76,28 @@ public class ItemMatchTest {
         testMove4.setLearnedByPokemon(testMove4LearnedByPokemon);
         
         
-        ArrayList<Move> testMoveList = new ArrayList<>();
-        testMoveList.add(testMove1);
-        testMoveList.add(testMove2);
-        testMoveList.add(testMove3);
-        testMoveList.add(testMove4);
-        //fake moves set-up complete   
-        
+        this.testMoveList = new ArrayList<>();
+        this.testMoveList.add(testMove1);
+        this.testMoveList.add(testMove2);
+        this.testMoveList.add(testMove3);
+        this.testMoveList.add(testMove4);
+        //fake moves set-up complete
+    }
+    
+    @AfterEach
+    public void tearDown() {
+        this.testMoveList = null;
+    }
+
+    /**
+     * Test of pkmnThatLearnAllMoves method, of class ItemMatch.
+     */
+    @Test
+    public void testPkmnThatLearnAllMoves() {
+        System.out.println("testing pkmnThatLearnAllMoves");
+           
         ItemMatch itemMatch = new ItemMatch();
-        ArrayList<String> result = itemMatch.pkmnThatLearnAllMoves(testMoveList);
+        ArrayList<String> result = itemMatch.pkmnThatLearnAllMoves(this.testMoveList);
         ArrayList<String> expResult = new ArrayList<>();
         expResult.add("bulbasaur");
         expResult.add("squirtle");
