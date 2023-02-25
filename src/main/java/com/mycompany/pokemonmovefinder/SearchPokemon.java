@@ -8,13 +8,12 @@ import com.mycompany.pokeapilibrary.pokemon.PokemonMove;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class MoveSearch implements Searcher {
+public class SearchPokemon implements Searcher {
 
     private final ArrayList<Move> moveList;
-    //private ArrayList<String> moveNames;
     private Request request;
 
-    public MoveSearch(ArrayList<Move> moveList) {
+    public SearchPokemon(ArrayList<Move> moveList) {
         this.moveList = moveList;
         this.request = new Request();
     }
@@ -24,8 +23,6 @@ public class MoveSearch implements Searcher {
     }
 
     public ArrayList<Result> getResults() {
-        //get all the moves first
-        //ArrayList<Move> moveList = this.getMovesFromAPI();
 
         ArrayList<ArrayList<String>> listsOfPkmnThatLearnEachMove = this.listsOfPkmnThatLearnEachMove(this.moveList);
 
@@ -51,20 +48,6 @@ public class MoveSearch implements Searcher {
         return results;
 
     }
-
-//    private ArrayList<Move> getMovesFromAPI() {
-//        ArrayList<Move> moves = new ArrayList<>();
-//
-//        //search each move name in the API
-//        //add resulting Move object to moves ArrayList
-//        for (int i = 0; i < this.moveNames.size(); i++) {
-//            String searchFor = this.moveNames.get(i);
-//            Move move = this.request.searchMove(searchFor);
-//            moves.add(move);
-//        }
-//
-//        return moves;
-//    }
 
     private ArrayList<ArrayList<String>> listsOfPkmnThatLearnEachMove(ArrayList<Move> moveList) {
         //for each move get the names of the pokemon that learn it
@@ -121,7 +104,7 @@ public class MoveSearch implements Searcher {
         for (int i = 0; i < firstList.size(); i++) {
             String currentPkmnName = firstList.get(i);
 
-            //if reaches 4 add name to pkmnNames 
+            //if reaches same as noOfLists add name to pkmnNames 
             int inLists = 1;
 
             //compare each item in firstList against currentList

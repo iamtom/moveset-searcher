@@ -16,9 +16,9 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class MoveSearchTest {
+public class SearchPokemonTest {
 
-    public MoveSearchTest() {
+    public SearchPokemonTest() {
     }
 
     @BeforeAll
@@ -38,7 +38,7 @@ public class MoveSearchTest {
     }
 
     /**
-     * Test of getResults method, of class MoveSearch.
+     * Test of getResults method, of class SearchPokemon.
      */
     @Test
     public void testGetResults() {
@@ -109,7 +109,7 @@ public class MoveSearchTest {
         testMoveList.add(testMove4);
         //fake moves set-up complete    
 
-        MoveSearch search = new MoveSearch(movesInput);
+        SearchPokemon search = new SearchPokemon(movesInput);
 
         //getResults calls getMovesFromAPI
         //when getMovesFromAPI uses a Request to get moves the mock will return

@@ -19,8 +19,10 @@ public class PokemonMoveFinder {
         return (args) -> {
             System.out.println("Loading the moveSelectDataRepository.");
             long start = System.nanoTime();
+            
             ArrayList<MoveSelectData> moveSelectList = MoveSelectDataLoader.loadFromAPI();
             moveDataRepository.saveAll(moveSelectList);
+            
             long end = System.nanoTime();
             double durationInMilliseconds = 1.0 * (end - start) / 1000000;
             System.out.println("Finished loading moveSelectDataRepository in "

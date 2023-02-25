@@ -36,7 +36,7 @@ public class MainController {
         Mapper mapper = new Mapper();
         System.out.println("Moves input " + movesInput);
         ArrayList<Move> moveList = mapper.toMoveList(movesInput);
-        MoveSearch search = new MoveSearch(moveList);
+        SearchPokemon search = new SearchPokemon(moveList);
         ArrayList<Result> searchResults = search.getResults();
         model.addAttribute("searchResults", searchResults);
 
