@@ -17,7 +17,7 @@ public class MoveSelectDataLoader {
         long start = System.nanoTime();
 
         Request request = new Request();
-        NamedAPIResourceList pagesOfMoves = request.allMovesList(0, 844);
+        NamedAPIResourceList pagesOfMoves = request.allMovesList(0, 918);
         ArrayList<NamedAPIResource> moves = pagesOfMoves.getResults();
 
         ArrayList<MoveSelectData> moveSelectDataList = new ArrayList<MoveSelectData>();

@@ -26,8 +26,6 @@ public class Mapper {
             moveNames.add(movesInput.getMove4());
         }
         
-        System.out.println("Mapper move names: " + moveNames);
-        
         ArrayList<Move> moveList = new ArrayList<>();
 
         //search each move name in the API
@@ -37,8 +35,6 @@ public class Mapper {
             Move move = this.request.searchMove(searchFor);
             moveList.add(move);
         }
-        
-        System.out.println("Mapper moveList " + moveList);
         
         return moveList;
     }

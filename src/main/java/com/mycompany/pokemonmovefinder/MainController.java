@@ -34,7 +34,7 @@ public class MainController {
         }
         
         Mapper mapper = new Mapper();
-        System.out.println("Moves input " + movesInput);
+
         ArrayList<Move> moveList = mapper.toMoveList(movesInput);
         PokemonSearch search = new PokemonSearch(moveList);
         ArrayList<Result> searchResults = search.getResults();

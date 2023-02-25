@@ -1,6 +1,5 @@
 package com.mycompany.pokemonmovefinder;
 
-import com.mycompany.pokeapilibrary.NamedAPIResource;
 import com.mycompany.pokeapilibrary.Request;
 import com.mycompany.pokeapilibrary.move.Move;
 import com.mycompany.pokeapilibrary.pokemon.Pokemon;
@@ -11,11 +10,13 @@ import java.util.Collections;
 public class PokemonSearch implements Searcher {
 
     private final ArrayList<Move> moveList;
+    private ItemMatch itemMatch;
     private Request request;
 
     public PokemonSearch(ArrayList<Move> moveList) {
         this.moveList = moveList;
         this.request = new Request();
+        this.itemMatch = new ItemMatch();
     }
 
     public void setRequestObject(Request request) {
@@ -23,20 +24,18 @@ public class PokemonSearch implements Searcher {
     }
 
     public ArrayList<Result> getResults() {
-
-        ArrayList<ArrayList<String>> listsOfPkmnThatLearnEachMove = this.listsOfPkmnThatLearnEachMove(this.moveList);
-
-        //now compare lists to find which pokemon can learn all the moves
-        ArrayList<String> pkmnThatLearnAllMoves = this.pkmnInAllLists(listsOfPkmnThatLearnEachMove);
+        ArrayList<String> pkmnThatLearnAllMoves = 
+                            this.itemMatch.pkmnThatLearnAllMoves(this.moveList);
+        
         Collections.sort(pkmnThatLearnAllMoves);
 
-        ArrayList<Pokemon> pokemonObjects = this.getPokemonObjects(pkmnThatLearnAllMoves);
-        
         ArrayList<String> moveNames = new ArrayList<>();
         for (int i = 0; i < this.moveList.size(); i++) {
             moveNames.add(moveList.get(i).getName());
         }
         
+        ArrayList<Pokemon> pokemonObjects = this.getPokemonObjects(pkmnThatLearnAllMoves);
+       
         ArrayList<Result> results = new ArrayList<>();
         for (Pokemon pokemon : pokemonObjects) {
             ArrayList<PokemonMove> pokemonMoves = this.getPokemonMoves(pokemon, moveNames);
@@ -44,37 +43,8 @@ public class PokemonSearch implements Searcher {
             results.add(result);
         }
 
-        //System.out.println(results);
         return results;
 
-    }
-
-    private ArrayList<ArrayList<String>> listsOfPkmnThatLearnEachMove(ArrayList<Move> moveList) {
-        //for each move get the names of the pokemon that learn it
-        //add those names to an ArrayList called 'names'
-        //Add each ArrayList to listsOfPkmnThatLearnEachMove
-
-        ArrayList<ArrayList<String>> namesOfPkmnThatLearnEachMove = new ArrayList<>();
-
-        for (int i = 0; i < moveList.size(); i++) {
-            Move currentMove = moveList.get(i);
-            ArrayList<String> names = this.listOfNamesForPkmnThatLearn(currentMove);
-            namesOfPkmnThatLearnEachMove.add(names);
-        }
-
-        return namesOfPkmnThatLearnEachMove;
-    }
-
-    private ArrayList<String> listOfNamesForPkmnThatLearn(Move move) {
-        ArrayList<String> pkmnThatLearnMove = new ArrayList<>();
-        ArrayList<NamedAPIResource> learnedByPokemon = move.learnedByPokemon();
-
-        for (int i = 0; i < learnedByPokemon.size(); i++) {
-            String name = learnedByPokemon.get(i).getName();
-            pkmnThatLearnMove.add(name);
-        }
-
-        return pkmnThatLearnMove;
     }
 
     private ArrayList<PokemonMove> getPokemonMoves(Pokemon pokemon, ArrayList<String> moveNames) {
@@ -92,35 +62,6 @@ public class PokemonSearch implements Searcher {
         }
 
         return movesWanted;
-    }
-
-    private ArrayList<String> pkmnInAllLists(ArrayList<ArrayList<String>> listOfLists) {
-        int noOfLists = listOfLists.size();
-        ArrayList<String> firstList = listOfLists.get(0);
-        ArrayList<String> pkmnNames = new ArrayList<>();
-
-        //work through first list, if the pokemon name is in all the other lists
-        //then we know it can learn all the moves
-        for (int i = 0; i < firstList.size(); i++) {
-            String currentPkmnName = firstList.get(i);
-
-            //if reaches same as noOfLists add name to pkmnNames 
-            int inLists = 1;
-
-            //compare each item in firstList against currentList
-            for (int j = 1; j < listOfLists.size(); j++) {
-                if (listOfLists.get(j).contains(currentPkmnName)) {
-                    inLists++;
-                }
-            }
-
-            if (inLists == noOfLists) {
-                pkmnNames.add(currentPkmnName);
-            }
-
-        }
-
-        return pkmnNames;
     }
 
     private ArrayList<Pokemon> getPokemonObjects(ArrayList<String> pkmnNames) {
