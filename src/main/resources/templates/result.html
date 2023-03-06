@@ -8,11 +8,25 @@
     <body>
         <h1>Pokémon Move Finder</h1>
         <p>These Pokemon can learn the selected moves:</p>
-        <table>
-            <tr th:each="searchResult : ${searchResults}">
-                <td th:text="${searchResult.pkmnName}"></td> 
-            </tr>
-        </table>
+        <div th:each="searchResult : ${searchResults}">
+            <p th:text="${searchResult.pkmnName}"></p>
+            <table>
+                <tr>
+                    <td>blank</td>
+                    <td>Level Up</td>
+                    <td>Machine</td>
+                    <td>Tutor</td>
+                    <td>Egg</td>
+                </tr>
+                <tr><!-- some kind of for each here?-->
+                    <td>Move name</td>
+                    <!-- where level up then put in level up column etc-->
+                </tr>
+                <tr th:each="move : ${searchResult.moves}">
+                    <td th:text="${move.move.name}"></td>
+                </tr>
+            </table>
+        </div>
         <br>
         <a href="/">New Search</a>
     </body> 
