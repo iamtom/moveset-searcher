@@ -35,7 +35,7 @@ public class PokemonSearch implements Search {
         ArrayList<Result> results = new ArrayList<>();
         for (Pokemon pokemon : pokemonObjects) {
             ArrayList<PokemonMove> pokemonMoves = this.getPokemonMoves(pokemon, moveNames);
-            Result result = new Result(pokemon.getName(), pokemonMoves);
+            Result result = Result.createResult(pokemon.getName(), pokemonMoves);
             results.add(result);
         }
 
