@@ -39,7 +39,8 @@ public class PokemonSearch implements Search {
             Result result = Result.createResultGroupedByVersion(pokemon.getName(), pokemonMoves);
             results.add(result);
         }
-
+        
+        System.out.println("HERE ARE THE NEW RESULTS " + results);
         return results;
     }
 
