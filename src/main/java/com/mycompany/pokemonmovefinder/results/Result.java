@@ -1,4 +1,4 @@
-package com.mycompany.pokemonmovefinder;
+package com.mycompany.pokemonmovefinder.results;
 
 import com.mycompany.pokeapilibrary.StringFormatter;
 import com.mycompany.pokeapilibrary.pokemon.PokemonMove;
@@ -27,7 +27,7 @@ public class Result {
 //        this.moves = moves;
 //    }
     
-    public static Result createResult(String pkmnName, ArrayList<PokemonMove> moves) {
+    public static Result createResultGroupedByVersion(String pkmnName, ArrayList<PokemonMove> moves) {
         Result result = new Result(pkmnName);
         //get all version names
         //for each version:
@@ -58,8 +58,21 @@ public class Result {
             PokemonMove currentMove = moves.get(count);
             String moveName = currentMove.getMove().getName();
             
-            ArrayList<String> versionNames = new ArrayList<>();
+            //list of all versionGroupDetails for this move
+            //this has the version, learn method, and level learned
+            //need to break it into separate lists based on version names
+            //there is one of these per version
+            //go through each one, take the data out into a HashMap
+            //where key is version name and value is a ResultMoveData with the info in it
+            //HashMap<String, ArrayList<ResultMoveData>> resultMoveDataList
+            //String versionName, ArrayList<ResultMoveData>
             ArrayList<PokemonMoveVersion> versions = currentMove.getVersionGroupDetails();
+            
+            //for version in versions
+            //
+            
+            //get a list of all the version names associated with this move
+            ArrayList<String> versionNames = new ArrayList<>();           
             for (PokemonMoveVersion version : versions) {
                 String versionName = version.getVersionGroup().getName();
                 if(versionNames.contains(versionName)) {

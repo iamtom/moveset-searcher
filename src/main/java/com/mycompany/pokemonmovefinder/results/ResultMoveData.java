@@ -1,4 +1,4 @@
-package com.mycompany.pokemonmovefinder;
+package com.mycompany.pokemonmovefinder.results;
 
 import com.mycompany.pokeapilibrary.StringFormatter;
 import java.util.ArrayList;

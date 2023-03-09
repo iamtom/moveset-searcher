@@ -1,5 +1,6 @@
 package com.mycompany.pokemonmovefinder;
 
+import com.mycompany.pokemonmovefinder.results.Result;
 import com.mycompany.pokeapilibrary.Request;
 import com.mycompany.pokeapilibrary.move.Move;
 import com.mycompany.pokeapilibrary.pokemon.Pokemon;
@@ -35,7 +36,7 @@ public class PokemonSearch implements Search {
         ArrayList<Result> results = new ArrayList<>();
         for (Pokemon pokemon : pokemonObjects) {
             ArrayList<PokemonMove> pokemonMoves = this.getPokemonMoves(pokemon, moveNames);
-            Result result = Result.createResult(pokemon.getName(), pokemonMoves);
+            Result result = Result.createResultGroupedByVersion(pokemon.getName(), pokemonMoves);
             results.add(result);
         }
 
