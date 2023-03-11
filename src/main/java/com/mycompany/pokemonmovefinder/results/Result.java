@@ -4,6 +4,8 @@ import com.mycompany.pokeapilibrary.StringFormatter;
 import com.mycompany.pokeapilibrary.pokemon.PokemonMove;
 import com.mycompany.pokeapilibrary.pokemon.PokemonMoveVersion;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,123 +13,80 @@ import java.util.stream.Collectors;
 public class Result {
 
     private String pkmnName;
-    private ArrayList<PokemonVersionResultData> versionResultDataList;
-    //remember level learned at 0 is when it is learned some way other than level up
-    //TODO add moves and versions etc so that the user can see which versions
-    //the pokemon learns some or all of the moves in
+    private HashMap<String, List<MoveResultData>> moveResultData;
 
-    public Result(String pkmnName) {
+    public Result(String pkmnName, HashMap<String, List<MoveResultData>> moveResultData) {
         this.pkmnName = StringFormatter.basicFormat(pkmnName);
+        this.moveResultData = moveResultData;
     }
 
-//    public Result(String pkmnName, ArrayList<PokemonMove> moves) {
-//        this.pkmnName = StringFormatter.basicFormat(pkmnName);
-//        this.moves = moves;
-//    }
-    public static Result createResultGroupedByVersion(String pkmnName, ArrayList<PokemonMove> moves) {
-        Result result = new Result(pkmnName);
-        //get all version names
-        //for each version:
-        //get move name
-        //get version
-        //within version get learnmethods and levels learned
-        //create PokemonMoveResultData
-
-        //pkmnName is set
-        //get each move
-        //in each move get all the version names
-        //for each version name get all the versionGroup where the name is versionName
-        //Go through each one, create hashmap of learnmethods and get move name
-        //create PokemonMoveResultData add to list
-        //then create versionResultDataList
-        //
-        //finding all the version names so they can be compared to later
-//        ArrayList<String> versionNames = new ArrayList<>();
-//        for (PokemonMove move : moves) {
-//            ArrayList<PokemonMoveVersion> versions = move.getVersionGroupDetails();
-//            for (PokemonMoveVersion version : versions) {
-//                String versionName = version.getVersionGroup().getName();
-//                if(versionNames.contains(versionName)) {
-//                   continue; 
-//                }
-//                versionNames.add(versionName);
-//            }
-//        }
-
-        ArrayList<PokemonVersionResultData> versionResultDataList = new ArrayList<>();
+    public static Result createResultGroupedByVersion(String pkmnName, ArrayList<PokemonMove> moves) {        
+        System.out.println("Result for " + pkmnName);
+        HashMap<String, List<MoveResultData>> versionResultData = new HashMap<>();
         
-        int count = 0;
-        while (count < moves.size()) {
-            PokemonMove currentMove = moves.get(count);
-            String currentMoveName = currentMove.getMove().getName();
-            //list of all versionGroupDetails for this move
-            //this has the version, learn method, and level learned
-            //need to break it into separate lists based on version names
-            //there is one of these per version
-            //go through each one, take the data out into a HashMap
-            //where key is version name and value is a PokemonMoveResultData with the info in it
-            //HashMap<String, ArrayList<ResultMoveData>> resultMoveDataList
-            //String versionName, ArrayList<ResultMoveData>
-            ArrayList<PokemonMoveVersion> versions = currentMove.getVersionGroupDetails();
-            
-            ArrayList<PokemonMoveResultData> pokemonMoveResultDataList = new ArrayList<>();
+        ArrayList<String> allVersionNames = new ArrayList<>();
+        allVersionNames = Result.allVersionNames(moves);
+        System.out.println("All version names: " + allVersionNames);
 
+        for (String currentVersion : allVersionNames) {
+            List<MoveResultData> moveResultDataList = new ArrayList<>();
+            for (PokemonMove move : moves) {
+                String moveName = move.getMove().getName();
+                ArrayList<PokemonMoveVersion> versionGroupDetails = move.getVersionGroupDetails();
+                List<PokemonMoveVersion> dataForCurrentVersion = Result.groupedByVersion(currentVersion, versionGroupDetails);
+                ArrayList<String> learnMethods = Result.extractLearnMethods(dataForCurrentVersion);
+                MoveResultData moveResultData = new MoveResultData(moveName, learnMethods);
+                moveResultDataList.add(moveResultData);
+            }
+            //moveResultDataList.sort(Comparator.comparing(o -> o.getMoveName()));
+            versionResultData.put(currentVersion, moveResultDataList);
+        }
 
-            //get a list of all the version names associated with this move
-            ArrayList<String> versionNames = new ArrayList<>();
+        Result result = new Result(pkmnName, versionResultData);
+        
+        return result;
+        
+    }
+    
+    private static ArrayList<String> allVersionNames(ArrayList<PokemonMove> moves) {
+        ArrayList<String> allVersionNames = new ArrayList<>();
+        for (PokemonMove move : moves) {
+            ArrayList<PokemonMoveVersion> versions = move.getVersionGroupDetails();
             for (PokemonMoveVersion version : versions) {
                 String versionName = version.getVersionGroup().getName();
-                if (versionNames.contains(versionName)) {
-                    continue;
+                if (!allVersionNames.contains(versionName)) {
+                    allVersionNames.add(versionName);
                 }
-                versionNames.add(versionName);
+                
             }
-
-            for (String versionName : versionNames) {
-                //e.g. use Stream to get all PokemonMoveVersion 
-                //where versionGroup.getName() = versionName
-                List<PokemonMoveVersion> groupedByVersion = new ArrayList<>();
-                groupedByVersion = versions
+        }
+        
+        return allVersionNames;
+    }
+       
+    private static List<PokemonMoveVersion> groupedByVersion(String versionName, ArrayList<PokemonMoveVersion> versionGroupDetails) {
+        List<PokemonMoveVersion> groupedByVersion = versionGroupDetails
                         .stream()
                         .filter(v -> v.getVersionGroup().getName().equals(versionName))
                         .collect(Collectors.toList());
-                
-                //get the learnmethods for the move in this version
-                HashMap<String, String> learnMethods = new HashMap<>();
-                for (PokemonMoveVersion version : groupedByVersion) {
-                    //getting out of memory error here:
-                    learnMethods.put(version.getMoveLearnMethod().getName(),
-                            String.valueOf(version.getLevelLearnedAt()));
-                }
-                
-                PokemonMoveResultData pkmnMoveResData = new PokemonMoveResultData(currentMoveName, learnMethods);
-                pokemonMoveResultDataList.add(pkmnMoveResData);
-                PokemonVersionResultData pkmnVerResData = new PokemonVersionResultData(versionName, pokemonMoveResultDataList);
-                versionResultDataList.add(pkmnVerResData);
-                
-                //now for each PokemonMoveVersion get the version name for the key
-                //and make the PokemonMoveResultData object. Add to HashMap
+        
+        return groupedByVersion;
+    }
+    
+    private static ArrayList<String> extractLearnMethods(List<PokemonMoveVersion> dataForCurrentVersion) {
+        ArrayList<String> learnMethods = new ArrayList<>();
+        
+        for (PokemonMoveVersion version : dataForCurrentVersion) {
+            String learnMethod = version.getMoveLearnMethod().getName();   
+            int levelLearnedAt = version.getLevelLearnedAt();
 
+            if(learnMethod.equals("level-up")) {
+                learnMethod = "Level " + levelLearnedAt;
             }
-
-            //get all the version names for the current move
-//            ArrayList<String> versionNames = new ArrayList<>(); 
-//            for(PokemonMoveVersion version : currentMove.getVersionGroupDetails()) {
-//                String versionName = version.getVersionGroup().getName();
-//                if(!versionNames.contains(versionName)) {
-//                    versionNames.add(versionName);
-//                }
-//            }
-            //go through each version name, gather information for the move
-//            ArrayList<PokemonMoveVersion> versionNames = currentMove.getVersionGroupDetails()
-//                    .stream()
-//                    .filter(v -> v.getVersionGroup().getName())
-//                    .
+            learnMethods.add(learnMethod);
+        
         }
-        
-        result.setVersionResultDataList(versionResultDataList);
-        
-        return result;
+        return learnMethods;
     }
 
     public String getPkmnName() {
@@ -145,16 +104,18 @@ public class Result {
 //    public void setMoves(ArrayList<PokemonMove> moves) {
 //        this.moves = moves;
 //    }
-    public ArrayList<PokemonVersionResultData> getVersionResultDataList() {
-        return versionResultDataList;
+
+    public HashMap<String, List<MoveResultData>> getMoveResultData() {
+        return moveResultData;
     }
 
-    public void setVersionResultDataList(ArrayList<PokemonVersionResultData> versionResultDataList) {
-        this.versionResultDataList = versionResultDataList;
+    public void setMoveResultData(HashMap<String, List<MoveResultData>> moveResultData) {
+        this.moveResultData = moveResultData;
     }
 
     @Override
     public String toString() {
-        return "Result{" + "pkmnName=" + pkmnName + ", versionResultDataList=" + versionResultDataList + '}';
+        return "Result{" + "pkmnName=" + pkmnName + ", versionResultData=" + moveResultData + '}';
     }
+
 }
