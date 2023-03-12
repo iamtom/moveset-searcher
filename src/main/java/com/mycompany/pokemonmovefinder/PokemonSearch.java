@@ -40,7 +40,6 @@ public class PokemonSearch implements Search {
             results.add(result);
         }
         
-        System.out.println("HERE ARE THE NEW RESULTS " + results);
         return results;
     }
 

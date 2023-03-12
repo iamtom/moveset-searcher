@@ -5,28 +5,26 @@ import com.mycompany.pokeapilibrary.pokemon.PokemonMove;
 import com.mycompany.pokeapilibrary.pokemon.PokemonMoveVersion;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Result {
 
     private String pkmnName;
-    private HashMap<String, List<MoveResultData>> moveResultData;
+    private LinkedHashMap<String, List<MoveResultData>> moveResultData;
 
-    public Result(String pkmnName, HashMap<String, List<MoveResultData>> moveResultData) {
+    public Result(String pkmnName, LinkedHashMap<String, List<MoveResultData>> moveResultData) {
         this.pkmnName = StringFormatter.basicFormat(pkmnName);
         this.moveResultData = moveResultData;
     }
 
     public static Result createResultGroupedByVersion(String pkmnName, ArrayList<PokemonMove> moves) {        
-        System.out.println("Result for " + pkmnName);
-        HashMap<String, List<MoveResultData>> versionResultData = new HashMap<>();
+        LinkedHashMap<String, List<MoveResultData>> versionResultData = new LinkedHashMap<>();
         
         ArrayList<String> allVersionNames = new ArrayList<>();
         allVersionNames = Result.allVersionNames(moves);
-        System.out.println("All version names: " + allVersionNames);
+        Collections.sort(allVersionNames);
 
         for (String currentVersion : allVersionNames) {
             List<MoveResultData> moveResultDataList = new ArrayList<>();
@@ -39,7 +37,8 @@ public class Result {
                 moveResultDataList.add(moveResultData);
             }
             //moveResultDataList.sort(Comparator.comparing(o -> o.getMoveName()));
-            versionResultData.put(currentVersion, moveResultDataList);
+            String versionName = StringFormatter.formatVersionName(currentVersion);
+            versionResultData.put(versionName, moveResultDataList);
         }
 
         Result result = new Result(pkmnName, versionResultData);
@@ -83,6 +82,7 @@ public class Result {
             if(learnMethod.equals("level-up")) {
                 learnMethod = "Level " + levelLearnedAt;
             }
+            learnMethod = StringFormatter.basicFormat(learnMethod);
             learnMethods.add(learnMethod);
         
         }
@@ -105,11 +105,11 @@ public class Result {
 //        this.moves = moves;
 //    }
 
-    public HashMap<String, List<MoveResultData>> getMoveResultData() {
+    public LinkedHashMap<String, List<MoveResultData>> getMoveResultData() {
         return moveResultData;
     }
 
-    public void setMoveResultData(HashMap<String, List<MoveResultData>> moveResultData) {
+    public void setMoveResultData(LinkedHashMap<String, List<MoveResultData>> moveResultData) {
         this.moveResultData = moveResultData;
     }
 

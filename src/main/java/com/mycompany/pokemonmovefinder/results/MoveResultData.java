@@ -1,5 +1,6 @@
 package com.mycompany.pokemonmovefinder.results;
 
+import com.mycompany.pokeapilibrary.StringFormatter;
 import java.util.ArrayList;
 
 public class MoveResultData {
@@ -7,7 +8,7 @@ public class MoveResultData {
     private ArrayList<String> learnMethods;
 
     public MoveResultData(String moveName, ArrayList<String> learnMethods) {
-        this.moveName = moveName;
+        this.moveName = StringFormatter.basicFormat(moveName);
         this.learnMethods = learnMethods;
     }
 
