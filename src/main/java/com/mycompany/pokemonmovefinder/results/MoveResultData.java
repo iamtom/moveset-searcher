@@ -4,6 +4,7 @@ import com.mycompany.pokeapilibrary.StringFormatter;
 import java.util.ArrayList;
 
 public class MoveResultData {
+
     private String moveName;
     private ArrayList<String> learnMethods;
 

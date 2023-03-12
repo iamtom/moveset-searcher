@@ -19,9 +19,9 @@ public class Result {
         this.moveResultData = moveResultData;
     }
 
-    public static Result createResultGroupedByVersion(String pkmnName, ArrayList<PokemonMove> moves) {        
+    public static Result createResultGroupedByVersion(String pkmnName, ArrayList<PokemonMove> moves) {
         LinkedHashMap<String, List<MoveResultData>> versionResultData = new LinkedHashMap<>();
-        
+
         ArrayList<String> allVersionNames = new ArrayList<>();
         allVersionNames = Result.allVersionNames(moves);
         Collections.sort(allVersionNames);
@@ -42,11 +42,11 @@ public class Result {
         }
 
         Result result = new Result(pkmnName, versionResultData);
-        
+
         return result;
-        
+
     }
-    
+
     private static ArrayList<String> allVersionNames(ArrayList<PokemonMove> moves) {
         ArrayList<String> allVersionNames = new ArrayList<>();
         for (PokemonMove move : moves) {
@@ -56,35 +56,35 @@ public class Result {
                 if (!allVersionNames.contains(versionName)) {
                     allVersionNames.add(versionName);
                 }
-                
+
             }
         }
-        
+
         return allVersionNames;
     }
-       
+
     private static List<PokemonMoveVersion> groupedByVersion(String versionName, ArrayList<PokemonMoveVersion> versionGroupDetails) {
         List<PokemonMoveVersion> groupedByVersion = versionGroupDetails
-                        .stream()
-                        .filter(v -> v.getVersionGroup().getName().equals(versionName))
-                        .collect(Collectors.toList());
-        
+                .stream()
+                .filter(v -> v.getVersionGroup().getName().equals(versionName))
+                .collect(Collectors.toList());
+
         return groupedByVersion;
     }
-    
+
     private static ArrayList<String> extractLearnMethods(List<PokemonMoveVersion> dataForCurrentVersion) {
         ArrayList<String> learnMethods = new ArrayList<>();
-        
+
         for (PokemonMoveVersion version : dataForCurrentVersion) {
-            String learnMethod = version.getMoveLearnMethod().getName();   
+            String learnMethod = version.getMoveLearnMethod().getName();
             int levelLearnedAt = version.getLevelLearnedAt();
 
-            if(learnMethod.equals("level-up")) {
+            if (learnMethod.equals("level-up")) {
                 learnMethod = "Level " + levelLearnedAt;
             }
             learnMethod = StringFormatter.basicFormat(learnMethod);
             learnMethods.add(learnMethod);
-        
+
         }
         return learnMethods;
     }
@@ -96,14 +96,6 @@ public class Result {
     public void setPkmnName(String pkmnName) {
         this.pkmnName = pkmnName;
     }
-
-//    public ArrayList<PokemonMove> getMoves() {
-//        return moves;
-//    }
-//
-//    public void setMoves(ArrayList<PokemonMove> moves) {
-//        this.moves = moves;
-//    }
 
     public LinkedHashMap<String, List<MoveResultData>> getMoveResultData() {
         return moveResultData;

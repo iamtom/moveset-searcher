@@ -31,15 +31,15 @@ public class PokemonSearch implements Search {
         ArrayList<String> moveNames = new ArrayList<>();
         for (int i = 0; i < this.moveList.size(); i++) {
             moveNames.add(moveList.get(i).getName());
-        }        
-        
+        }
+
         ArrayList<Result> results = new ArrayList<>();
         for (Pokemon pokemon : pokemonObjects) {
             ArrayList<PokemonMove> pokemonMoves = this.getPokemonMoves(pokemon, moveNames);
             Result result = Result.createResultGroupedByVersion(pokemon.getName(), pokemonMoves);
             results.add(result);
         }
-        
+
         return results;
     }
 
@@ -71,7 +71,7 @@ public class PokemonSearch implements Search {
 
         return pokemonObjects;
     }
-    
+
     public void setRequestObject(Request request) {
         this.request = request;
     }
