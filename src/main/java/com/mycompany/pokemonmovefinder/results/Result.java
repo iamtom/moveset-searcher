@@ -40,7 +40,7 @@ public class Result {
             String versionName = StringFormatter.formatVersionName(currentVersion);
             versionResultData.put(versionName, moveResultDataList);
         }
-
+        
         Result result = new Result(pkmnName, versionResultData);
 
         return result;
