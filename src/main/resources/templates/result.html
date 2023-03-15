@@ -8,12 +8,12 @@
     <body>
         <h1>Pokémon Move Finder</h1>
         <p>These Pokemon can learn the selected moves:</p>
-        <div style="border: 2px solid black; margin: 10px;" th:each="searchResult : ${searchResults}">            
-            <h2 style="margin: 5px;" th:text="${searchResult.pkmnName}"></h2>
+        <div class="pokemonData" th:each="searchResult : ${searchResults}">            
+            <h2 th:text="${searchResult.pkmnName}"></h2>
             <hr>
-            <div style="margin: 5px;" th:each="mapEntry : ${searchResult.moveResultData}">
-                <h3 th:text="${mapEntry.key}"></h3>
-                <div style="display: inline-block; vertical-align: top;" th:each="moveResultData : ${mapEntry.value}">
+            <div th:each="mapEntry : ${searchResult.moveResultData}">
+                <h3 class="versionName" th:text="${mapEntry.key}"></h3>
+                <div class="learnMethods" th:each="moveResultData : ${mapEntry.value}">
                     <b th:text="${moveResultData.moveName}"></b>
                     <div th:each="learnMethod : ${moveResultData.learnMethods}">
                         <p th:text="${learnMethod}"></p>

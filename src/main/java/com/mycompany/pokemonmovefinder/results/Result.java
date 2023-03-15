@@ -82,6 +82,9 @@ public class Result {
             if (learnMethod.equals("level-up")) {
                 learnMethod = "Level " + levelLearnedAt;
             }
+            if (learnMethod.equals("egg")) {
+                learnMethod = "Egg Move";
+            }
             learnMethod = StringFormatter.basicFormat(learnMethod);
             learnMethods.add(learnMethod);
 

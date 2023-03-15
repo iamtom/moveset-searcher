@@ -8,7 +8,10 @@
     <body>
         <h1>Pokémon Move Finder</h1>
         <p>How to use: select up to four moves. Click 'submit' to see which Pokémon
-            can learn all of the chosen moves</p>
+            can learn all of the chosen moves.</p>
+        <p>The tool will show which versions of the game these moves can be learned in.</p>
+        <p>Note that sometimes Pokémon can only learn all the moves in certain versions of the games.</p>
+        <p>Results that say "Level 0" indicate the move is learned when it evolves.</p>
 
         <form action="#" th:action="@{/}" th:object="${movesInput}" method="post">
             <table>
