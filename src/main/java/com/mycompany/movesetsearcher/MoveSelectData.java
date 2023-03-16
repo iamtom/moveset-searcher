@@ -1,4 +1,4 @@
-package com.mycompany.pokemonmovefinder;
+package com.mycompany.movesetsearcher;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

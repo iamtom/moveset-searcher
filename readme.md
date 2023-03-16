@@ -1,5 +1,5 @@
-# Pokémon Move Finder
-https://pokemon-move-finder.onrender.com
+# Moveset Searcher
+https://moveset-searcher.onrender.com
 
 ## What is it?
 The user can choose up to four Pokémon moves and this application will find which

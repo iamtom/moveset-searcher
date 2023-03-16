@@ -1,10 +1,10 @@
-package com.mycompany.pokemonmovefinder.tools;
+package com.mycompany.movesetsearcher.tools;
 
 import com.mycompany.pokeapilibrary.NamedAPIResource;
 import com.mycompany.pokeapilibrary.NamedAPIResourceList;
 import com.mycompany.pokeapilibrary.Request;
 import com.mycompany.pokeapilibrary.StringFormatter;
-import com.mycompany.pokemonmovefinder.MoveSelectData;
+import com.mycompany.movesetsearcher.MoveSelectData;
 import java.util.ArrayList;
 import java.util.Comparator;
 

@@ -1,6 +1,6 @@
-package com.mycompany.pokemonmovefinder;
+package com.mycompany.movesetsearcher;
 
-import com.mycompany.pokemonmovefinder.results.Result;
+import com.mycompany.movesetsearcher.results.Result;
 import java.util.ArrayList;
 
 public interface Search {

@@ -1,6 +1,6 @@
-package com.mycompany.pokemonmovefinder;
+package com.mycompany.movesetsearcher;
 
-import com.mycompany.pokemonmovefinder.tools.MoveSelectDataLoader;
+import com.mycompany.movesetsearcher.tools.MoveSelectDataLoader;
 import java.util.ArrayList;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -8,10 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class PokemonMoveFinder {
+public class MovesetSearcher {
 
     public static void main(String[] args) {
-        SpringApplication.run(PokemonMoveFinder.class, args);
+        SpringApplication.run(MovesetSearcher.class, args);
     }
 
     @Bean

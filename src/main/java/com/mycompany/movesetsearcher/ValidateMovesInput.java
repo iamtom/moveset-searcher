@@ -1,4 +1,4 @@
-package com.mycompany.pokemonmovefinder;
+package com.mycompany.movesetsearcher;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

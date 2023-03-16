@@ -1,5 +1,6 @@
-package com.mycompany.pokemonmovefinder;
+package com.mycompany.movesetsearcher;
 
+import com.mycompany.movesetsearcher.ItemMatch;
 import com.mycompany.pokeapilibrary.NamedAPIResource;
 import com.mycompany.pokeapilibrary.move.Move;
 import java.util.ArrayList;

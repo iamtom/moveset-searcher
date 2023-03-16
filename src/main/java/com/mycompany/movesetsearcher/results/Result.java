@@ -1,4 +1,4 @@
-package com.mycompany.pokemonmovefinder.results;
+package com.mycompany.movesetsearcher.results;
 
 import com.mycompany.pokeapilibrary.StringFormatter;
 import com.mycompany.pokeapilibrary.pokemon.PokemonMove;

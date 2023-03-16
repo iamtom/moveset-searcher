@@ -1,4 +1,4 @@
-package com.mycompany.pokemonmovefinder;
+package com.mycompany.movesetsearcher;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

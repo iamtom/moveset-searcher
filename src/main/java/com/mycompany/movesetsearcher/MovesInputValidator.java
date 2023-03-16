@@ -1,4 +1,4 @@
-package com.mycompany.pokemonmovefinder;
+package com.mycompany.movesetsearcher;
 
 import java.util.ArrayList;
 import javax.validation.ConstraintValidator;

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.mycompany</groupId>
-	<artifactId>pokemonmovefinder</artifactId>
+	<artifactId>movesetsearcher</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>pokemon-move-finder</name>
+	<name>moveset-searcher</name>
 	<description>Find Pokemon that learn the chosen moves</description>
 	<properties>
 		<java.version>11</java.version>

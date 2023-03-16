@@ -1,6 +1,8 @@
-package com.mycompany.pokemonmovefinder;
+package com.mycompany.movesetsearcher;
 
-import com.mycompany.pokemonmovefinder.results.Result;
+import com.mycompany.movesetsearcher.PokemonSearch;
+import com.mycompany.movesetsearcher.ItemMatch;
+import com.mycompany.movesetsearcher.results.Result;
 import com.mycompany.pokeapilibrary.move.Move;
 import com.mycompany.pokeapilibrary.Request;
 import com.mycompany.pokeapilibrary.NamedAPIResource;

@@ -1,4 +1,4 @@
-package com.mycompany.pokemonmovefinder;
+package com.mycompany.movesetsearcher;
 
 import com.mycompany.pokeapilibrary.NamedAPIResource;
 import com.mycompany.pokeapilibrary.move.Move;
