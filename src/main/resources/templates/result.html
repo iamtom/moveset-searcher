@@ -3,24 +3,30 @@
     <head> 
         <title>Moveset Searcher</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link th:href="@{/css/style.css}" rel="stylesheet" />
     </head>
     <body>
-        <h1>Moveset Searcher</h1>
-        <p>These Pokemon can learn the selected moves:</p>
-        <div class="pokemonData" th:each="searchResult : ${searchResults}">
+        <header>
+            <h1>Moveset Searcher</h1>
+            <p>Results that say "Level 0" indicate the move is learned when it evolves.</p>
+            <p>These Pokemon can learn the selected moves:</p>           
+        </header>
+        <section class="pokemonData" th:each="searchResult : ${searchResults}">
             <h2 th:text="${searchResult.pkmnName}"></h2>
-            <hr>
-            <div th:each="mapEntry : ${searchResult.moveResultData}">
+            <div class="versionData" th:each="mapEntry : ${searchResult.moveResultData}">
                 <h3 class="versionName" th:text="${mapEntry.key}"></h3>
                 <div class="learnMethods" th:each="moveResultData : ${mapEntry.value}">
                     <b th:text="${moveResultData.moveName}"></b>
+                    <div th:if="${moveResultData.learnMethods.isEmpty}">
+                        <p>Not Learned</p>
+                    </div>
                     <div th:each="learnMethod : ${moveResultData.learnMethods}">
-                        <p th:text="${learnMethod}"></p>
+                        <p th:text="${learnMethod}"></p>                        
                     </div>                    
                 </div>
             </div>
-        </div>
+        </section>
         <br>
         <a href="/">New Search</a>
     </body>
